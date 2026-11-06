@@ -1,5 +1,41 @@
 [
   {
+    "orderId": "CMD-INB-2026-511852",
+    "date": "2026-11-06T22:48:19.099Z",
+    "status": "en_attente_preparation",
+    "paymentMethod": "Cash on Delivery (Espèces à la livraison)",
+    "customer": {
+      "fullName": "Yassine Benali",
+      "phone": "0612345678",
+      "city": "Casablanca",
+      "address": "Bd Zerktouni, Résidence Al Manar",
+      "notes": ""
+    },
+    "items": [
+      {
+        "productId": "daghmous",
+        "name": "Miel d'Euphorbe Sauvage (Daghmous)",
+        "weight": 500,
+        "isPack": false,
+        "unitPrice": 220,
+        "quantity": 2,
+        "lineTotal": 440
+      }
+    ],
+    "totals": {
+      "subtotal": 440,
+      "discount": 44,
+      "promo": {
+        "code": "INOBEE10",
+        "discountPercent": 10,
+        "amount": 44
+      },
+      "deliveryFee": 0,
+      "total": 396,
+      "currency": "MAD"
+    }
+  },
+  {
     "orderId": "CMD-INB-2026-234505",
     "date": "2026-11-06T21:27:41.342Z",
     "status": "en_attente_preparation",

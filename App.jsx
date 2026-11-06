@@ -26,31 +26,61 @@ import {
   Tag,
   Loader2,
   Mountain,
-  Flower2,
-  Compass
+  Flower2
 } from 'lucide-react';
 
 // ============================================================================
-// INOBEE SARL — Société Marocaine de Production & Vente de Miel Pur
-// Boutique E-Commerce Officielle Full-Stack
+// INOBEE SARL — Société de Production & Vente de Miel Pur du Maroc
+// Boutique E-Commerce Officielle
 // ============================================================================
 
 const API_BASE = (typeof window !== 'undefined' && (window.location.port === '3000' || window.location.port === '5173'))
   ? '' 
   : (typeof window !== 'undefined' && window.location.port === '5000' ? '' : 'http://localhost:5000');
 
-// Photos de secours haute résolution des miels Inobee
-const FALLBACK_IMAGES = {
-  daghmous: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=900&q=80',
-  thym: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=900&q=80',
-  sidr: 'https://images.unsplash.com/photo-1471943311424-646960669fbc?auto=format&fit=crop&w=900&q=80',
-  oranger: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=900&q=80',
-  pack: 'https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=900&q=80',
-  hero: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=1600&q=85',
-  story: 'https://images.unsplash.com/photo-1471943311424-646960669fbc?auto=format&fit=crop&w=1200&q=80'
+// ============================================================================
+// COMPOSANT LOGO OFFICIEL AVEC FALLBACK EMBLEME DORE EN CAS DE PREVIEW HORS-LIGNE
+// ============================================================================
+function BrandLogo({ className = "h-10 w-auto object-contain", containerClassName = "" }) {
+  const [hasError, setHasError] = useState(false);
+
+  if (hasError) {
+    return (
+      <div className={`flex items-center justify-center ${containerClassName}`} title="Inobee SARL">
+        <svg viewBox="0 0 44 44" className="w-10 h-10 text-[#D97706]" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="22,2 39,11.5 39,32.5 22,42 5,32.5 5,11.5" stroke="#D97706" strokeWidth="2.5" fill="#FAF7F2" />
+          <polygon points="22,7 34,14.5 34,29.5 22,37 10,29.5 10,14.5" fill="#F59E0B" fillOpacity="0.2" stroke="#F59E0B" strokeWidth="1.2" />
+          <circle cx="22" cy="21" r="5.5" fill="#D97706" />
+          <path d="M15 18C15 15.5 18 13.5 22 13.5C26 13.5 29 15.5 29 18" stroke="#1E130A" strokeWidth="1.8" strokeLinecap="round" />
+          <path d="M17 25L27 25" stroke="#FAF7F2" strokeWidth="1.8" strokeLinecap="round" />
+        </svg>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src="/assets/logo.png"
+      alt="Inobee SARL"
+      className={className}
+      onError={() => setHasError(true)}
+    />
+  );
+}
+
+// ============================================================================
+// PHOTOS PERMANENTES ET VÉRIFIÉES DE MIEL PUR (STUDIO LIGHTING)
+// ============================================================================
+const HONEY_IMAGES = {
+  hero: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=1000&q=80',
+  daghmous: 'https://images.unsplash.com/photo-1471943311424-646960669fbc?auto=format&fit=crop&w=800&q=80',
+  thym: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=800&q=80',
+  sidr: 'https://images.unsplash.com/photo-1587049352847-4a222e784d38?auto=format&fit=crop&w=800&q=80',
+  oranger: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=800&q=80',
+  pack: 'https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=800&q=80'
 };
 
-// Catalogue officiel des miels purs de la société Inobee SARL
+// Catalogue officiel Inobee SARL
 const DEFAULT_PRODUCTS = [
   {
     id: 'daghmous',
@@ -60,13 +90,11 @@ const DEFAULT_PRODUCTS = [
     terroir: 'Anti-Atlas · Terroir de Guelmim-Oued Noun',
     badge: 'Rare & Ardent',
     altitude: 'Altitude : 950 m',
-    bloom: 'Floraison Printanière Aride',
     isRare: true,
     prices: { 250: 120, 500: 220, 1000: 400 },
     defaultWeight: 500,
-    image: 'assets/img/product-daghmous.jpg',
-    fallbackImage: FALLBACK_IMAGES.daghmous,
-    description: "Récolté sur les versants arides de l'Anti-Atlas par notre société, le miel de Daghmous se distingue par sa douce saveur initiale suivie d'une chaleur vive et stimulante au fond de la gorge.",
+    image: HONEY_IMAGES.daghmous,
+    description: "Récolté sur les versants arides de l'Anti-Atlas par Inobee SARL, le miel de Daghmous se distingue par sa douce saveur initiale suivie d'une chaleur vive et stimulante au fond de la gorge.",
     benefits: [
       'Puissant tonifiant naturel pour les voies respiratoires et la gorge',
       'Action chauffante traditionnellement reconnue contre les refroidissements',
@@ -85,12 +113,10 @@ const DEFAULT_PRODUCTS = [
     terroir: 'Haut-Atlas · Plateaux d’Imouzzer (1 400m)',
     badge: 'Haut-Plateau',
     altitude: 'Altitude : 1 400 m',
-    bloom: 'Floraison Estivale d’Altitude',
     isRare: true,
     prices: { 250: 130, 500: 240, 1000: 450 },
     defaultWeight: 500,
-    image: 'assets/img/product-thym.jpg',
-    fallbackImage: FALLBACK_IMAGES.thym,
+    image: HONEY_IMAGES.thym,
     description: "Issu du thym sauvage butiné en haute altitude sur les versants rocheux de l'Atlas. Sa robe ambrée foncée et ses arômes boisés puissants en font le joyau de l'apithérapie marocaine.",
     benefits: [
       'Remarquables propriétés antiseptiques et antibactériennes',
@@ -110,12 +136,10 @@ const DEFAULT_PRODUCTS = [
     terroir: 'Vallées préservées du Souss & Pré-Sahara',
     badge: 'Réserve Prestige',
     altitude: 'Altitude : 650 m',
-    bloom: 'Floraison Automnale Rare',
     isRare: true,
     prices: { 250: 190, 500: 350, 1000: 650 },
     defaultWeight: 500,
-    image: 'assets/img/product-sidr.jpg',
-    fallbackImage: FALLBACK_IMAGES.sidr,
+    image: HONEY_IMAGES.sidr,
     description: "Le Miel de Sidr (Jujubier sauvage) est l'un des nectars les plus recherchés au monde. Saveur riche aux notes de caramel boisé et de noisette, réputé pour sa densité minérale.",
     benefits: [
       'Grand tonifiant physique, hépatique et métabolique',
@@ -135,12 +159,10 @@ const DEFAULT_PRODUCTS = [
     terroir: 'Plaines fertiles de Taroudant & Vergers du Souss',
     badge: 'Douceur Solaire',
     altitude: 'Altitude : 320 m',
-    bloom: 'Floraison Printanière des Agrumes',
     isRare: false,
     prices: { 250: 65, 500: 110, 1000: 200 },
     defaultWeight: 500,
-    image: 'assets/img/product-oranger.jpg',
-    fallbackImage: FALLBACK_IMAGES.oranger,
+    image: HONEY_IMAGES.oranger,
     description: "Récolté lors de la floraison printanière des agrumes du Souss. Ce miel lumineux séduit petits et grands par son parfum frais de fleur d'oranger et sa douceur apaisante.",
     benefits: [
       'Idéal pour calmer l’agitation et préparer un sommeil serein',
@@ -160,19 +182,17 @@ const DEFAULT_PRODUCTS = [
     terroir: 'Sélection Tri-Régionale : Anti-Atlas, Haut-Atlas & Souss',
     badge: 'Édition Spéciale',
     altitude: 'Multi-Terroirs',
-    bloom: 'Cuvée des 3 Saisons',
     isPack: true,
     prices: { 750: 320 },
     originalPrice: 370,
     defaultWeight: 750,
-    image: 'assets/img/product-pack.jpg',
-    fallbackImage: FALLBACK_IMAGES.pack,
+    image: HONEY_IMAGES.pack,
     description: "Le coffret prestige réunissant les 3 trésors de notre société : 1 pot de Daghmous (250g), 1 pot de Thym sauvage (250g), et 1 pot d'Oranger (250g). Livré avec une cuillère artisanale en bois d’oranger offerte.",
     benefits: [
       '3 profils aromatiques et thérapeutiques complémentaires',
       'Économie immédiate de 50 MAD sur le tarif au détail',
       'Cuillère en bois d’oranger offerte dans chaque coffret',
-      'Présentation soignée sous étui kraft rigide recyclable'
+      'Présentation soignée sous étui rigide recyclable'
     ],
     sensory: { intensity: 85, sweetness: 65, floralNotes: 90, persistence: 85 },
     usage: 'Dégustation comparative ou cure apicole complète selon les besoins de la journée.',
@@ -180,7 +200,7 @@ const DEFAULT_PRODUCTS = [
   }
 ];
 
-// Terroirs apicoles marocains
+// Régions de récolte
 const TERROIRS = [
   {
     id: 'anti-atlas',
@@ -188,8 +208,7 @@ const TERROIRS = [
     title: "Terroir Sauvage d'Euphorbe (Daghmous)",
     altitude: "800m – 1 200m",
     climate: "Climat aride, chaleur minérale et vents sahariens",
-    botany: "Euphorbia resinifera endémique, arganier sauvage",
-    honeyName: "Miel d'Euphorbe (Daghmous)"
+    botany: "Euphorbia resinifera endémique, arganier sauvage"
   },
   {
     id: 'haut-atlas',
@@ -197,8 +216,7 @@ const TERROIRS = [
     title: "Sommets d'Altitude du Thym (Zâatar)",
     altitude: "1 400m – 2 200m",
     climate: "Air pur d'altitude, hivers froids et étés ensoleillés",
-    botany: "Thymus capitatus des rocailles, genévrier, lavande sauvage",
-    honeyName: "Miel de Thym Pur (Zâatar)"
+    botany: "Thymus capitatus des rocailles, genévrier, lavande sauvage"
   },
   {
     id: 'souss',
@@ -206,12 +224,10 @@ const TERROIRS = [
     title: "Vergers d'Agrumes & Fleurs d'Oranger",
     altitude: "250m – 500m",
     climate: "Douceur atlantique et brises printanières parfumées",
-    botany: "Fleurs d'oranger, agrumes nobles et flore sauvage",
-    honeyName: "Miel d'Oranger & Fleurs Sauvages"
+    botany: "Fleurs d'oranger, agrumes nobles et flore sauvage"
   }
 ];
 
-// Villes marocaines desservies
 const MOROCCAN_CITIES = [
   'Casablanca', 'Rabat', 'Marrakech', 'Tanger', 'Fès', 'Agadir', 
   'Meknès', 'Oujda', 'Kénitra', 'Tétouan', 'Salé', 'Témara', 
@@ -219,7 +235,6 @@ const MOROCCAN_CITIES = [
   'Guelmim', 'Autre Ville (Maroc)'
 ];
 
-// Avis clients vérifiés
 const REVIEWS = [
   {
     id: 1,
@@ -228,7 +243,7 @@ const REVIEWS = [
     date: 'Il y a 2 jours',
     rating: 5,
     product: "Miel d'Euphorbe (Daghmous)",
-    comment: "Le miel de Daghmous de la société Inobee est tout simplement exceptionnel. On ressent immédiatement cette douce chaleur caractéristique au fond de la gorge qui signe un vrai miel brut sauvage non altéré. Commande passée le matin, livrée dès le lendemain à Casablanca avec paiement en espèces."
+    comment: "Le miel de Daghmous d'Inobee SARL est tout simplement exceptionnel. On ressent immédiatement cette douce chaleur caractéristique au fond de la gorge qui signe un vrai miel brut sauvage non altéré. Commande passée le matin, livrée dès le lendemain à Casablanca avec paiement en espèces."
   },
   {
     id: 2,
@@ -250,7 +265,6 @@ const REVIEWS = [
   }
 ];
 
-// FAQ Apicole
 const FAQS = [
   {
     q: 'Comment la société Inobee garantit-elle la pureté de ses miels ?',
@@ -271,7 +285,7 @@ const FAQS = [
 ];
 
 // ============================================================================
-// COMPOSANT : CANEVAS SUBTIL DE PARTICULES DE POLLEN DORÉ
+// CANEVAS AMBIANT PARTICULES DE POLLEN DORE
 // ============================================================================
 function GoldenPollenCanvas() {
   const canvasRef = useRef(null);
@@ -296,7 +310,7 @@ function GoldenPollenCanvas() {
     const particles = Array.from({ length: particleCount }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      size: Math.random() * 2.5 + 1,
+      size: Math.random() * 2.2 + 1,
       speedX: (Math.random() - 0.5) * 0.35 + 0.1,
       speedY: (Math.random() - 0.5) * 0.25 - 0.2,
       opacity: Math.random() * 0.5 + 0.2,
@@ -344,13 +358,13 @@ function GoldenPollenCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none z-10 opacity-60"
+      className="absolute inset-0 w-full h-full pointer-events-none z-10 opacity-50"
     />
   );
 }
 
 // ============================================================================
-// COMPOSANT PRINCIPAL : APP (INOBEE SARL)
+// COMPOSANT PRINCIPAL
 // ============================================================================
 export default function App() {
   const [products, setProducts] = useState(DEFAULT_PRODUCTS);
@@ -366,7 +380,7 @@ export default function App() {
     'pack-terroir': 750
   });
 
-  // Panier avec persistance locale
+  // Panier
   const [cart, setCart] = useState(() => {
     try {
       const saved = localStorage.getItem('inobee_luxury_cart');
@@ -383,7 +397,7 @@ export default function App() {
   const [orderConfirmed, setOrderConfirmed] = useState(null);
   const [toastMessage, setToastMessage] = useState(null);
 
-  // Formulaire & Code Promo
+  // Formulaire & Promo
   const [couponCode, setCouponCode] = useState('');
   const [appliedDiscount, setAppliedDiscount] = useState(0);
   const [couponError, setCouponError] = useState('');
@@ -399,7 +413,7 @@ export default function App() {
   });
   const [formErrors, setFormErrors] = useState({});
 
-  // Synchronisation avec l'API Backend Express
+  // Synchronisation backend
   useEffect(() => {
     let isMounted = true;
     async function fetchProducts() {
@@ -412,14 +426,14 @@ export default function App() {
           }
         }
       } catch (err) {
-        // Fallback local instantané
+        // Fallback local
       }
     }
     fetchProducts();
     return () => { isMounted = false; };
   }, []);
 
-  // Sauvegarde panier dans LocalStorage
+  // Persistance panier
   useEffect(() => {
     try {
       localStorage.setItem('inobee_luxury_cart', JSON.stringify(cart));
@@ -435,7 +449,6 @@ export default function App() {
     }, 3200);
   };
 
-  // Calculs financiers
   const cartSubtotal = useMemo(() => {
     return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }, [cart]);
@@ -487,7 +500,6 @@ export default function App() {
           price: price,
           quantity: 1,
           image: product.image,
-          fallbackImage: product.fallbackImage,
           isPack: product.isPack || false
         }
       ];
@@ -514,7 +526,6 @@ export default function App() {
     setCart(prev => prev.filter(item => item.id !== cartItemId));
   };
 
-  // Validation Code Promo via API Backend
   const handleApplyCoupon = async (e) => {
     e.preventDefault();
     setCouponError('');
@@ -570,7 +581,6 @@ export default function App() {
     return Object.keys(errors).length === 0;
   };
 
-  // Envoi Commande COD via Backend Express
   const handleConfirmOrderCOD = async (e) => {
     e.preventDefault();
     if (cart.length === 0) {
@@ -664,7 +674,6 @@ export default function App() {
     return products.filter(p => p.category === activeFilter);
   }, [products, activeFilter]);
 
-  // Recommandation du Guide de Choix
   const recommendedProduct = useMemo(() => {
     if (guideGoal === 'immunity') return products.find(p => p.id === 'daghmous') || products[0];
     if (guideGoal === 'energy') return products.find(p => p.id === 'sidr') || products[2];
@@ -698,31 +707,19 @@ export default function App() {
       </div>
 
       {/* ====================================================================
-          2. STICKY NAVBAR AVEC LOGO OFFICIEL INOBEE SARL PROÉMINENT
+          2. STICKY NAVBAR AVEC LOGO OFFICIEL INOBEE SARL (/assets/logo.png)
           ==================================================================== */}
       <header className="sticky top-0 z-40 bg-[#FAF7F2]/95 backdrop-blur-xl border-b border-[#E8E1D5] transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 sm:h-24 flex items-center justify-between">
           
-          {/* Logo Officiel Inobee SARL — Mise en valeur nette et professionnelle */}
-          <a href="#" className="flex items-center gap-3.5 sm:gap-4 group">
-            <div className="relative h-14 sm:h-16 w-14 sm:w-16 flex items-center justify-center shrink-0">
-              <img
-                src="assets/logo.png"
-                alt="Inobee SARL — Logo Officiel"
-                className="max-h-full max-w-full object-contain drop-shadow-[0_2px_8px_rgba(217,119,6,0.3)] transition-transform group-hover:scale-105 duration-300"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                  const fallback = e.currentTarget.parentElement?.querySelector('.logo-svg-fallback');
-                  if (fallback) fallback.classList.remove('hidden');
-                }}
-              />
-              <div className="logo-svg-fallback hidden text-[#D97706]">
-                <Droplets className="w-8 h-8 fill-[#D97706]" />
-              </div>
+          {/* Logo Officiel Inobee SARL */}
+          <a href="#" className="flex items-center gap-3 group">
+            <div className="flex items-center justify-center shrink-0">
+              <BrandLogo className="h-10 sm:h-12 w-auto object-contain drop-shadow-[0_2px_8px_rgba(217,119,6,0.25)] transition-transform group-hover:scale-105 duration-300" />
             </div>
 
             <div className="flex flex-col">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 <span className="font-serif text-2xl sm:text-3xl font-extrabold tracking-tight text-[#1E130A] leading-none">
                   INOBEE
                 </span>
@@ -736,7 +733,7 @@ export default function App() {
             </div>
           </a>
 
-          {/* Navigation Desktop Commerciale */}
+          {/* Navigation Liens Desktop */}
           <nav className="hidden lg:flex items-center gap-8 text-sm font-semibold text-[#4B5563]">
             <a href="#boutique" className="hover:text-[#D97706] transition-colors">Nos Miels</a>
             <a href="#terroirs" className="hover:text-[#D97706] transition-colors flex items-center gap-1">
@@ -807,7 +804,7 @@ export default function App() {
 
       <main>
         {/* ====================================================================
-            3. HERO SECTION : IDENTITÉ & VALEUR COMMERCIALE
+            3. HERO SECTION : SHOWCASE STUDIO DU POT DE MIEL PUR
             ==================================================================== */}
         <section className="relative overflow-hidden pt-8 pb-16 lg:pt-16 lg:pb-24 border-b border-[#E8E1D5] bg-gradient-to-b from-[#FAF7F2] via-[#FAF4E8] to-[#FAF7F2]">
           <GoldenPollenCanvas />
@@ -870,26 +867,19 @@ export default function App() {
 
               </div>
 
-              {/* Colonne Droite : Pot de Miel de Luxe avec Logo Officiel en Sceau d'Authenticité */}
+              {/* Colonne Droite : Showcase Studio Jarre de Miel Pur (Remplace l'ancienne image) */}
               <div className="lg:col-span-5 relative flex justify-center">
                 <div className="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-gradient-to-br from-[#FAF7F2] to-[#E8E1D5] group card-luxury-hover">
                   <img
-                    src="assets/img/product-daghmous.jpg"
-                    alt="Miel Pur Inobee SARL"
+                    src={HONEY_IMAGES.hero}
+                    alt="Miel Brut Pur Inobee SARL"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
-                    onError={(e) => {
-                      e.currentTarget.src = FALLBACK_IMAGES.hero;
-                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#140C06]/85 via-transparent to-transparent"></div>
                   
                   {/* Sceau d'Authenticité Officiel avec Logo */}
                   <div className="absolute top-5 left-5 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-[#D97706]/40 shadow-lg flex items-center gap-2.5">
-                    <img
-                      src="assets/logo.png"
-                      alt="Logo Inobee"
-                      className="w-7 h-7 object-contain"
-                    />
+                    <BrandLogo className="h-7 w-auto object-contain" />
                     <div>
                       <span className="text-[10px] font-bold text-[#1E130A] block leading-none">Inobee SARL</span>
                       <span className="text-[8px] tracking-wider text-[#D97706] font-bold uppercase">Sceau d'Authenticité</span>
@@ -900,7 +890,7 @@ export default function App() {
                   <div className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-white/40 shadow-xl flex items-center justify-between">
                     <div>
                       <p className="text-[10px] font-bold uppercase tracking-wider text-[#D97706]">Récolte Fraîche 2026</p>
-                      <p className="font-serif text-sm font-bold text-[#1E130A]">Miel d'Euphorbe & Thym de l'Atlas</p>
+                      <p className="font-serif text-sm font-bold text-[#1E130A]">Miel Brut du Terroir Marocain</p>
                       <p className="text-[11px] text-[#6B7280]">Non pasteurisé · Extraction centrifuge à froid</p>
                     </div>
                     <span className="px-3 py-1 bg-[#15803D]/10 text-[#15803D] text-xs font-bold rounded-full shrink-0">
@@ -915,7 +905,7 @@ export default function App() {
         </section>
 
         {/* ====================================================================
-            4. BOUTIQUE OFFICIELLE DES MIELS INOBEE SARL
+            4. BOUTIQUE OFFICIELLE DES MIELS INOBEE SARL (5 PRODUITS AVEC IMAGES VÉRIFIÉES)
             ==================================================================== */}
         <section id="boutique" className="py-16 sm:py-24 bg-white border-b border-[#E8E1D5]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -978,7 +968,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Grille de Produits */}
+            {/* Grille des Produits */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProducts.map((product) => {
                 const currentWeight = selectedWeights[product.id] || product.defaultWeight;
@@ -989,15 +979,12 @@ export default function App() {
                     key={product.id}
                     className="group bg-[#FAF7F2] rounded-3xl border border-[#E8E1D5] overflow-hidden flex flex-col justify-between card-luxury-hover"
                   >
-                    {/* Image & Badges */}
+                    {/* Image Produit */}
                     <div className="relative aspect-[4/3] bg-white overflow-hidden">
                       <img
                         src={product.image}
                         alt={product.name}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
-                        onError={(e) => {
-                          e.currentTarget.src = product.fallbackImage;
-                        }}
                       />
                       
                       <div className="absolute top-4 left-4 flex flex-col gap-1.5 items-start">
@@ -1123,7 +1110,6 @@ export default function App() {
                 <span className="text-xs text-[#6B7280]">Sélectionnez votre objectif :</span>
               </div>
 
-              {/* Boutons d'objectifs de consommation */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
                 <button
                   type="button"
@@ -1182,7 +1168,6 @@ export default function App() {
                 </button>
               </div>
 
-              {/* Carte Recommandation */}
               {recommendedProduct && (
                 <div className="p-6 rounded-2xl bg-[#FAF7F2] border border-[#E8E1D5] flex flex-col md:flex-row items-center justify-between gap-6">
                   <div className="flex items-center gap-4">
@@ -1191,7 +1176,6 @@ export default function App() {
                         src={recommendedProduct.image}
                         alt={recommendedProduct.name}
                         className="w-full h-full object-cover"
-                        onError={(e) => { e.currentTarget.src = recommendedProduct.fallbackImage; }}
                       />
                     </div>
                     <div>
@@ -1289,17 +1273,12 @@ export default function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               
-              {/* Logo Officiel Inobee SARL & Photo Rucher */}
               <div className="lg:col-span-5 order-2 lg:order-1 space-y-6">
                 
-                {/* Carte de Présentation avec Logo Officiel Proéminent */}
+                {/* Carte de Présentation avec Logo Officiel Inobee SARL */}
                 <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E8E1D5] shadow-xl text-center space-y-4">
                   <div className="w-24 h-24 sm:w-28 sm:h-28 mx-auto flex items-center justify-center p-2 rounded-2xl bg-[#FAF7F2] border border-[#D97706]/40 shadow-inner">
-                    <img
-                      src="assets/logo.png"
-                      alt="Logo Inobee SARL"
-                      className="max-h-full max-w-full object-contain drop-shadow-[0_2px_8px_rgba(217,119,6,0.3)]"
-                    />
+                    <BrandLogo className="h-16 w-auto object-contain drop-shadow" />
                   </div>
                   <div>
                     <h3 className="font-serif text-2xl font-bold text-[#1E130A]">Inobee SARL</h3>
@@ -1314,10 +1293,9 @@ export default function App() {
 
                 <div className="relative rounded-3xl overflow-hidden shadow-lg border-2 border-white aspect-video bg-white">
                   <img
-                    src="assets/img/product-sidr.jpg"
+                    src="https://images.unsplash.com/photo-1471943311424-646960669fbc?auto=format&fit=crop&w=800&q=80"
                     alt="Rucher Inobee dans l'Atlas"
                     className="w-full h-full object-cover"
-                    onError={(e) => { e.currentTarget.src = FALLBACK_IMAGES.story; }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#140C06]/70 via-transparent to-transparent flex items-end p-4">
                     <span className="text-xs text-white font-medium">Ruchers en zone sauvage préservée de l'Atlas</span>
@@ -1480,15 +1458,10 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-white/10">
             
-            {/* Colonne Marque avec Logo */}
             <div className="lg:col-span-5 space-y-4">
               <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 rounded-xl bg-white p-1 flex items-center justify-center shrink-0">
-                  <img
-                    src="assets/logo.png"
-                    alt="Logo Inobee SARL"
-                    className="max-h-full max-w-full object-contain"
-                  />
+                <div className="bg-white rounded-xl p-1.5 flex items-center justify-center shrink-0">
+                  <BrandLogo className="h-10 w-auto object-contain" />
                 </div>
                 <div>
                   <span className="font-serif text-xl font-bold text-white tracking-tight">INOBEE SARL</span>
@@ -1504,7 +1477,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Liens Rapides */}
             <div className="lg:col-span-3 space-y-3">
               <h4 className="text-xs font-bold uppercase tracking-wider text-[#D97706]">Boutique Directe</h4>
               <ul className="space-y-2 text-xs text-white/70">
@@ -1516,7 +1488,6 @@ export default function App() {
               </ul>
             </div>
 
-            {/* Coordonnées & Assistance Maroc */}
             <div className="lg:col-span-4 space-y-3">
               <h4 className="text-xs font-bold uppercase tracking-wider text-[#D97706]">Commandes & Service Client</h4>
               <p className="text-xs text-white/70">
@@ -1565,10 +1536,9 @@ export default function App() {
           <div className="fixed inset-y-0 right-0 max-w-full flex pl-6 sm:pl-10">
             <div className="w-screen max-w-lg bg-[#FAF7F2] shadow-2xl flex flex-col border-l border-[#E8E1D5]">
               
-              {/* Header Panier avec Logo */}
               <div className="p-6 bg-white border-b border-[#E8E1D5] flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <img src="assets/logo.png" alt="Inobee Logo" className="w-8 h-8 object-contain" />
+                  <BrandLogo className="h-8 w-auto object-contain" />
                   <div>
                     <h3 className="font-serif text-lg font-bold text-[#1E130A]">Panier Inobee SARL</h3>
                     <span className="text-[10px] text-[#D97706] font-semibold">
@@ -1642,9 +1612,6 @@ export default function App() {
                           src={item.image}
                           alt={item.name}
                           className="w-full h-full object-cover"
-                          onError={(e) => {
-                            e.currentTarget.src = item.fallbackImage;
-                          }}
                         />
                       </div>
 
@@ -2039,8 +2006,8 @@ export default function App() {
 
             {/* Logo Officiel au sommet du reçu */}
             <div className="text-center py-2">
-              <div className="w-16 h-16 mx-auto mb-2 flex items-center justify-center">
-                <img src="assets/logo.png" alt="Inobee Logo" className="max-h-full max-w-full object-contain drop-shadow" />
+              <div className="w-14 h-14 mx-auto mb-2 flex items-center justify-center">
+                <BrandLogo className="h-12 w-auto object-contain drop-shadow" />
               </div>
               <span className="text-[10px] font-bold uppercase tracking-widest text-[#D97706]">
                 Inobee SARL • Bon de Commande Officiel

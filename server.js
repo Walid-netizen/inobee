@@ -35,6 +35,15 @@ app.use((req, res, next) => {
 // ----------------------------------------------------------------------------
 // BASE DE DONNÉES EN MÉMOIRE : CATALOGUE OFFICIEL DES PRODUITS
 // ----------------------------------------------------------------------------
+const HONEY_IMAGES = {
+  hero: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=1000&q=80',
+  daghmous: 'https://images.unsplash.com/photo-1471943311424-646960669fbc?auto=format&fit=crop&w=800&q=80',
+  thym: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=800&q=80',
+  sidr: 'https://images.unsplash.com/photo-1587049352847-4a222e784d38?auto=format&fit=crop&w=800&q=80',
+  oranger: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=800&q=80',
+  pack: 'https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=800&q=80'
+};
+
 const PRODUCTS = [
   {
     id: 'daghmous',
@@ -47,8 +56,8 @@ const PRODUCTS = [
     prices: { 250: 120, 500: 220, 1000: 400 },
     defaultWeight: 500,
     inventory: { inStock: true, stockUnits: 64 },
-    image: 'assets/img/product-daghmous.jpg',
-    fallbackImage: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=900&q=80',
+    image: HONEY_IMAGES.daghmous,
+    fallbackImage: HONEY_IMAGES.daghmous,
     description: "Récolté sur les versants arides de l'Anti-Atlas, le miel de Daghmous se distingue par sa douce saveur initiale suivie d'une sensation de chaleur vive et stimulante au fond de la gorge.",
     benefits: [
       'Puissant tonifiant naturel pour les voies respiratoires et la gorge',
@@ -71,8 +80,8 @@ const PRODUCTS = [
     prices: { 250: 130, 500: 240, 1000: 450 },
     defaultWeight: 500,
     inventory: { inStock: true, stockUnits: 48 },
-    image: 'assets/img/product-thym.jpg',
-    fallbackImage: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=900&q=80',
+    image: HONEY_IMAGES.thym,
+    fallbackImage: HONEY_IMAGES.thym,
     description: "Issu du thym sauvage butiné en haute altitude sur les versants rocheux de l'Atlas. Sa robe ambrée foncée et ses arômes boisés puissants en font le joyau de l'apithérapie marocaine.",
     benefits: [
       'Remarquables propriétés antiseptiques et antibactériennes',
@@ -95,8 +104,8 @@ const PRODUCTS = [
     prices: { 250: 190, 500: 350, 1000: 650 },
     defaultWeight: 500,
     inventory: { inStock: true, stockUnits: 32 },
-    image: 'assets/img/product-sidr.jpg',
-    fallbackImage: 'https://images.unsplash.com/photo-1471943311424-646960669fbc?auto=format&fit=crop&w=900&q=80',
+    image: HONEY_IMAGES.sidr,
+    fallbackImage: HONEY_IMAGES.sidr,
     description: "Le Miel de Sidr (Jujubier sauvage) est l'un des nectars les plus recherchés au monde. Saveur riche aux notes de caramel boisé et de noisette, réputé pour sa densité minérale.",
     benefits: [
       'Grand tonifiant physique, hépatique et métabolique',
@@ -119,8 +128,8 @@ const PRODUCTS = [
     prices: { 250: 65, 500: 110, 1000: 200 },
     defaultWeight: 500,
     inventory: { inStock: true, stockUnits: 90 },
-    image: 'assets/img/product-oranger.jpg',
-    fallbackImage: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=900&q=80',
+    image: HONEY_IMAGES.oranger,
+    fallbackImage: HONEY_IMAGES.oranger,
     description: "Récolté lors de la floraison printanière des agrumes du Souss. Ce miel lumineux séduit petits et grands par son parfum frais de fleur d'oranger et sa douceur apaisante.",
     benefits: [
       'Idéal pour calmer l’agitation et préparer un sommeil serein',
@@ -144,8 +153,8 @@ const PRODUCTS = [
     originalPrice: 370,
     defaultWeight: 750,
     inventory: { inStock: true, stockUnits: 25 },
-    image: 'assets/img/product-pack.jpg',
-    fallbackImage: 'https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=900&q=80',
+    image: HONEY_IMAGES.pack,
+    fallbackImage: HONEY_IMAGES.pack,
     description: "Le coffret prestige réunissant les 3 trésors de l'apiculture marocaine : 1 pot de Daghmous (250g), 1 pot de Thym sauvage (250g), et 1 pot d'Oranger (250g). Livré avec une cuillère artisanale en bois d’oranger.",
     benefits: [
       '3 profils aromatiques et thérapeutiques complémentaires',
