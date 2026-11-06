@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inobee SARL — Miel Brut Pur du Maroc & Apithérapie Sauvage</title>
+  <meta name="description" content="Boutique officielle Inobee SARL. Miels sauvages bruts du Haut-Atlas, Anti-Atlas et Souss. Extraits à froid, certifiés purs en laboratoire et payables à la livraison au Maroc." />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/logo.png" />
+
+  <!-- Google Fonts : Playfair Display + Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN avec extensions de motion et nature -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            umber: {
+              DEFAULT: '#1E130A',
+              dark: '#140C06',
+              deep: '#0F0904',
+              light: '#2E1D10'
+            },
+            honey: {
+              amber: '#D97706',
+              gold: '#F59E0B',
+              warm: '#E68A00',
+              cream: '#FAF7F2',
+              wax: '#F5EBD6',
+              nectar: '#FEF3C7'
+            },
+            botanical: {
+              DEFAULT: '#1A3D2E',
+              deep: '#122B20',
+              moss: '#2D5A46',
+              sage: '#15803D',
+              light: '#86EFAC'
+            }
+          },
+          animation: {
+            'float-slow': 'float 6s ease-in-out infinite',
+            'float-delayed': 'float 7s ease-in-out 2s infinite',
+            'shimmer': 'shimmer 2.5s infinite linear',
+            'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+            'drift': 'drift 12s linear infinite',
+            'nectar-drop': 'nectarDrop 2s ease-in-out infinite'
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-200% 0' },
+              '100%': { backgroundPosition: '200% 0' },
+            },
+            pulseGlow: {
+              '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+              '50%': { opacity: '0.8', transform: 'scale(1.05)' },
+            },
+            drift: {
+              '0%': { transform: 'translateX(0) translateY(0)' },
+              '50%': { transform: 'translateX(15px) translateY(-15px)' },
+              '100%': { transform: 'translateX(0) translateY(0)' },
+            },
+            nectarDrop: {
+              '0%, 100%': { transform: 'scaleY(1)' },
+              '50%': { transform: 'scaleY(1.15) translateY(2px)' },
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Texture géométrique subtile d'alvéoles de cire d'abeille (Honeycomb pattern) */
+    .honeycomb-pattern {
+      background-color: #FAF7F2;
+      background-image: radial-gradient(#D97706 0.75px, transparent 0.75px), radial-gradient(#D97706 0.75px, #FAF7F2 0.75px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+      background-opacity: 0.04;
+    }
+    
+    .honeycomb-dark {
+      background-image: radial-gradient(rgba(245, 158, 11, 0.08) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    /* Scrollbar dorée apicole */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAF7F2;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D97706;
+      border-radius: 5px;
+      border: 2px solid #FAF7F2;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B45309;
+    }
+
+    /* Reflet de lumière dorée sur les cartes de luxe */
+    .card-luxury-hover {
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-luxury-hover:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 25px 50px -12px rgba(217, 119, 6, 0.15), 0 0 0 1px rgba(217, 119, 6, 0.35);
+    }
+  </style>
+</head>
+<body class="bg-[#FAF7F2] text-[#1F2937] antialiased selection:bg-[#D97706]/20 selection:text-[#1E130A] overflow-x-hidden">
+  <div id="root"></div>
+  <script type="module" src="/main.jsx"></script>
+</body>
+</html>

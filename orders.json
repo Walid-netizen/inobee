@@ -1,0 +1,47 @@
+[
+  {
+    "orderId": "CMD-INB-2026-234505",
+    "date": "2026-11-06T21:27:41.342Z",
+    "status": "en_attente_preparation",
+    "paymentMethod": "Cash on Delivery (Espèces à la livraison)",
+    "customer": {
+      "fullName": "Mehdi Benjelloun",
+      "phone": "0661234567",
+      "city": "Casablanca",
+      "address": "22 Boulevard d Anfa, Étage 4",
+      "notes": ""
+    },
+    "items": [
+      {
+        "productId": "daghmous",
+        "name": "Miel d'Euphorbe Sauvage (Daghmous)",
+        "weight": 500,
+        "isPack": false,
+        "unitPrice": 220,
+        "quantity": 2,
+        "lineTotal": 440
+      },
+      {
+        "productId": "thym",
+        "name": "Miel de Thym Pur (Zâatar)",
+        "weight": 250,
+        "isPack": false,
+        "unitPrice": 130,
+        "quantity": 1,
+        "lineTotal": 130
+      }
+    ],
+    "totals": {
+      "subtotal": 570,
+      "discount": 57,
+      "promo": {
+        "code": "INOBEE10",
+        "discountPercent": 10,
+        "amount": 57
+      },
+      "deliveryFee": 0,
+      "total": 513,
+      "currency": "MAD"
+    }
+  }
+]
