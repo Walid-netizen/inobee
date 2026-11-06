@@ -23,31 +23,23 @@ import {
   Menu,
   Heart,
   Droplets,
-  ExternalLink,
-  ChevronRight,
-  Filter,
   Tag,
-  Gift,
   Loader2,
-  Volume2,
-  VolumeX,
-  Compass,
-  Wind,
-  Sun,
   Mountain,
-  Flower2
+  Flower2,
+  Compass
 } from 'lucide-react';
 
 // ============================================================================
-// INOBEE SARL — Expérience Sensorielle & Nature (Full-Stack React)
-// Maison Apicole Marocaine d'Exception · Miels Bruts & Terroirs Sauvages
+// INOBEE SARL — Société Marocaine de Production & Vente de Miel Pur
+// Boutique E-Commerce Officielle Full-Stack
 // ============================================================================
 
 const API_BASE = (typeof window !== 'undefined' && (window.location.port === '3000' || window.location.port === '5173'))
   ? '' 
   : (typeof window !== 'undefined' && window.location.port === '5000' ? '' : 'http://localhost:5000');
 
-// Fallback image URLs (Macro Photographie Naturelle de Miel)
+// Photos de secours haute résolution des miels Inobee
 const FALLBACK_IMAGES = {
   daghmous: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=900&q=80',
   thym: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=900&q=80',
@@ -58,7 +50,7 @@ const FALLBACK_IMAGES = {
   story: 'https://images.unsplash.com/photo-1471943311424-646960669fbc?auto=format&fit=crop&w=1200&q=80'
 };
 
-// Catalogue de base sécurisé
+// Catalogue officiel des miels purs de la société Inobee SARL
 const DEFAULT_PRODUCTS = [
   {
     id: 'daghmous',
@@ -67,14 +59,14 @@ const DEFAULT_PRODUCTS = [
     tagline: 'Tonus, gorge et voies respiratoires',
     terroir: 'Anti-Atlas · Terroir de Guelmim-Oued Noun',
     badge: 'Rare & Ardent',
-    altitude: '950 m',
-    bloom: 'Floraison Printemps Aride',
+    altitude: 'Altitude : 950 m',
+    bloom: 'Floraison Printanière Aride',
     isRare: true,
     prices: { 250: 120, 500: 220, 1000: 400 },
     defaultWeight: 500,
     image: 'assets/img/product-daghmous.jpg',
     fallbackImage: FALLBACK_IMAGES.daghmous,
-    description: "Récolté sur les versants arides de l'Anti-Atlas, le miel de Daghmous se distingue par sa douce saveur initiale suivie d'une sensation de chaleur vive et stimulante au fond de la gorge.",
+    description: "Récolté sur les versants arides de l'Anti-Atlas par notre société, le miel de Daghmous se distingue par sa douce saveur initiale suivie d'une chaleur vive et stimulante au fond de la gorge.",
     benefits: [
       'Puissant tonifiant naturel pour les voies respiratoires et la gorge',
       'Action chauffante traditionnellement reconnue contre les refroidissements',
@@ -83,7 +75,7 @@ const DEFAULT_PRODUCTS = [
     ],
     sensory: { intensity: 95, sweetness: 45, floralNotes: 70, persistence: 90 },
     usage: '1 cuillère à café le matin à jeun. Avaler lentement pour laisser la chaleur bienfaisante enrober la gorge. Ne pas chauffer au-dessus de 40°C.',
-    labData: { hmf: '6.4 mg/kg (Norme ONSSA < 40)', moisture: '15.8% (Pureté brute)', purity: '100% sans sucre ajouté' }
+    labData: { hmf: '6.4 mg/kg (Norme ONSSA < 40)', moisture: '15.8% (Pureté brute)', purity: '100% pur sans sucre ajouté' }
   },
   {
     id: 'thym',
@@ -92,7 +84,7 @@ const DEFAULT_PRODUCTS = [
     tagline: 'Antiseptique naturel et digestion',
     terroir: 'Haut-Atlas · Plateaux d’Imouzzer (1 400m)',
     badge: 'Haut-Plateau',
-    altitude: '1 400 m',
+    altitude: 'Altitude : 1 400 m',
     bloom: 'Floraison Estivale d’Altitude',
     isRare: true,
     prices: { 250: 130, 500: 240, 1000: 450 },
@@ -117,7 +109,7 @@ const DEFAULT_PRODUCTS = [
     tagline: 'Énergie, vitalité et prestige',
     terroir: 'Vallées préservées du Souss & Pré-Sahara',
     badge: 'Réserve Prestige',
-    altitude: '650 m',
+    altitude: 'Altitude : 650 m',
     bloom: 'Floraison Automnale Rare',
     isRare: true,
     prices: { 250: 190, 500: 350, 1000: 650 },
@@ -142,7 +134,7 @@ const DEFAULT_PRODUCTS = [
     tagline: 'Douceur quotidienne pour toute la famille',
     terroir: 'Plaines fertiles de Taroudant & Vergers du Souss',
     badge: 'Douceur Solaire',
-    altitude: '320 m',
+    altitude: 'Altitude : 320 m',
     bloom: 'Floraison Printanière des Agrumes',
     isRare: false,
     prices: { 250: 65, 500: 110, 1000: 200 },
@@ -167,7 +159,7 @@ const DEFAULT_PRODUCTS = [
     tagline: 'Coffret dégustation idéal pour offrir ou s’initier',
     terroir: 'Sélection Tri-Régionale : Anti-Atlas, Haut-Atlas & Souss',
     badge: 'Édition Spéciale',
-    altitude: 'Multi-Altitude',
+    altitude: 'Multi-Terroirs',
     bloom: 'Cuvée des 3 Saisons',
     isPack: true,
     prices: { 750: 320 },
@@ -175,7 +167,7 @@ const DEFAULT_PRODUCTS = [
     defaultWeight: 750,
     image: 'assets/img/product-pack.jpg',
     fallbackImage: FALLBACK_IMAGES.pack,
-    description: "Le coffret prestige réunissant les 3 trésors de l'apiculture marocaine : 1 pot de Daghmous (250g), 1 pot de Thym sauvage (250g), et 1 pot d'Oranger (250g). Livré avec une cuillère artisanale en bois d’oranger.",
+    description: "Le coffret prestige réunissant les 3 trésors de notre société : 1 pot de Daghmous (250g), 1 pot de Thym sauvage (250g), et 1 pot d'Oranger (250g). Livré avec une cuillère artisanale en bois d’oranger offerte.",
     benefits: [
       '3 profils aromatiques et thérapeutiques complémentaires',
       'Économie immédiate de 50 MAD sur le tarif au détail',
@@ -188,37 +180,34 @@ const DEFAULT_PRODUCTS = [
   }
 ];
 
-// Terroirs du Maroc interactifs
+// Terroirs apicoles marocains
 const TERROIRS = [
   {
     id: 'anti-atlas',
     name: "L'Anti-Atlas & Guelmim",
-    title: "Terre Minérale d'Euphorbe Sauvage",
+    title: "Terroir Sauvage d'Euphorbe (Daghmous)",
     altitude: "800m – 1 200m",
-    climate: "Climat aride et solaire, vents sahariens vivifiants",
-    botany: "Euphorbia resinifera endémique, arganier sauvage, romarin rupestre",
-    honeyId: 'daghmous',
-    color: 'from-amber-600/20 to-orange-500/10'
+    climate: "Climat aride, chaleur minérale et vents sahariens",
+    botany: "Euphorbia resinifera endémique, arganier sauvage",
+    honeyName: "Miel d'Euphorbe (Daghmous)"
   },
   {
     id: 'haut-atlas',
     name: "Le Haut-Atlas & Imouzzer",
-    title: "Sanctuaire Alpin du Thym Zâatar",
+    title: "Sommets d'Altitude du Thym (Zâatar)",
     altitude: "1 400m – 2 200m",
-    climate: "Air pur d'altitude, hivers enneigés et étés lumineux",
-    botany: "Thymus capitatus des rocailles, genévrier thurifère, lavande sauvage",
-    honeyId: 'thym',
-    color: 'from-emerald-700/20 to-amber-600/10'
+    climate: "Air pur d'altitude, hivers froids et étés ensoleillés",
+    botany: "Thymus capitatus des rocailles, genévrier, lavande sauvage",
+    honeyName: "Miel de Thym Pur (Zâatar)"
   },
   {
     id: 'souss',
     name: "La Plaine du Souss & Taroudant",
-    title: "Oasis Florale & Vergers Solaires",
+    title: "Vergers d'Agrumes & Fleurs d'Oranger",
     altitude: "250m – 500m",
-    climate: "Douceur atlantique et brises parfumées de fleurs d'oranger",
-    botany: "Citrus aurantium en fleurs, grenadiers, amandiers de montagne",
-    honeyId: 'oranger',
-    color: 'from-yellow-500/20 to-amber-400/10'
+    climate: "Douceur atlantique et brises printanières parfumées",
+    botany: "Fleurs d'oranger, agrumes nobles et flore sauvage",
+    honeyName: "Miel d'Oranger & Fleurs Sauvages"
   }
 ];
 
@@ -239,7 +228,7 @@ const REVIEWS = [
     date: 'Il y a 2 jours',
     rating: 5,
     product: "Miel d'Euphorbe (Daghmous)",
-    comment: "Le miel de Daghmous d'Inobee est tout simplement exceptionnel. On ressent immédiatement cette douce chaleur caractéristique au fond de la gorge qui signe un miel brut sauvage non altéré. Commande passée le matin, livrée le lendemain avec paiement en espèces."
+    comment: "Le miel de Daghmous de la société Inobee est tout simplement exceptionnel. On ressent immédiatement cette douce chaleur caractéristique au fond de la gorge qui signe un vrai miel brut sauvage non altéré. Commande passée le matin, livrée dès le lendemain à Casablanca avec paiement en espèces."
   },
   {
     id: 2,
@@ -248,7 +237,7 @@ const REVIEWS = [
     date: 'Il y a 6 jours',
     rating: 5,
     product: 'Miel de Thym Pur (Zâatar)',
-    comment: "En tant que médecin et passionnée de nutrition, la qualité d'Inobee m'a immédiatement séduite. La texture est dense, non pasteurisée, sans surchauffe industrielle. Le miel de thym est devenu indispensable pour notre cure matinale d'immunité."
+    comment: "En tant que médecin et amatrice de produits apicoles authentiques, la rigueur d'Inobee SARL m'a convaincue. La texture est dense, non pasteurisée, sans surchauffe industrielle. Le miel de thym est devenu indispensable chez nous."
   },
   {
     id: 3,
@@ -257,23 +246,23 @@ const REVIEWS = [
     date: 'Il y a 10 jours',
     rating: 5,
     product: 'Pack Découverte Terroir (Trio)',
-    comment: "Le Pack Découverte est un sans-faute : présentation digne d'une grande maison de luxe, pots bien scellés et cuillère en bois très pratique. Mention spéciale pour le Sidr qui a une finesse et des notes de noisette remarquables."
+    comment: "Le Pack Découverte est un sans-faute : présentation digne d'une grande société de luxe, pots bien scellés et cuillère en bois très pratique. Mention spéciale pour le Sidr qui a une finesse et des notes de noisette remarquables."
   }
 ];
 
 // FAQ Apicole
 const FAQS = [
   {
-    q: 'Comment être certain que le miel Inobee est 100% pur et brut ?',
-    a: 'Nos miels sont extraits à froid par force centrifuge sans jamais dépasser la température naturelle de la ruche (35°C). Chaque lot est soumis à des analyses rigoureuses garantissant un taux d’humidité inférieur à 17%, l’absence totale de sucre ajouté, de sirop de glucose ou de résidus chimiques.'
+    q: 'Comment la société Inobee garantit-elle la pureté de ses miels ?',
+    a: 'Nos miels sont extraits à froid par force centrifuge dans notre atelier apicole sans jamais dépasser la température naturelle de la ruche (35°C). Chaque lot fait l’objet de contrôles physico-chimiques stricts attestant un taux d’humidité inférieur à 17% et l’absence totale de sucre ajouté ou de sirop.'
   },
   {
     q: 'Pourquoi mon miel se cristallise-t-il avec le temps ?',
-    a: 'La cristallisation est la preuve absolue d’un miel pur et vivant ! Seuls les miels industriels pasteurisés ou coupés au sirop restent indéfiniment liquides. Pour lui redonner une texture onctueuse, il suffit de tiédir délicatement le pot au bain-marie sans dépasser 38°C.'
+    a: 'La cristallisation est la signature incontestable d’un miel pur, brut et vivant ! Seuls les miels industriels pasteurisés ou mélangés au glucose restent indéfiniment liquides. Pour lui redonner une texture souple, il suffit de tiédir délicatement le pot au bain-marie sans dépasser 38°C.'
   },
   {
     q: 'Quels sont vos délais et frais de livraison au Maroc ?',
-    a: 'Nous livrons sous 24h ouvrées à Casablanca, Rabat et Marrakech, et sous 24 à 48h partout ailleurs au Royaume du Maroc. La livraison est 100% gratuite dès 400 MAD d’achats (sinon 35 MAD fixes).'
+    a: 'Inobee SARL expédie les commandes quotidiennement. Nous livrons sous 24h ouvrées à Casablanca, Rabat et Marrakech, et sous 24 à 48h dans toutes les autres villes du Royaume. La livraison est 100% offerte dès 400 MAD d’achats (sinon 35 MAD fixes).'
   },
   {
     q: 'Comment s’effectue le paiement à la livraison (Cash on Delivery) ?',
@@ -282,7 +271,7 @@ const FAQS = [
 ];
 
 // ============================================================================
-// COMPOSANT 1 : CANEVAS DE PARTICULES DE POLLEN DORÉ FLOTTANT
+// COMPOSANT : CANEVAS SUBTIL DE PARTICULES DE POLLEN DORÉ
 // ============================================================================
 function GoldenPollenCanvas() {
   const canvasRef = useRef(null);
@@ -303,64 +292,41 @@ function GoldenPollenCanvas() {
     };
     window.addEventListener('resize', handleResize);
 
-    // Initialisation des grains de pollen flottants
-    const particleCount = Math.floor(Math.min(width, 1200) / 28);
+    const particleCount = Math.floor(Math.min(width, 1200) / 35);
     const particles = Array.from({ length: particleCount }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      size: Math.random() * 2.8 + 1,
-      speedX: (Math.random() - 0.5) * 0.4 + 0.15,
-      speedY: (Math.random() - 0.5) * 0.3 - 0.25,
-      opacity: Math.random() * 0.6 + 0.2,
+      size: Math.random() * 2.5 + 1,
+      speedX: (Math.random() - 0.5) * 0.35 + 0.1,
+      speedY: (Math.random() - 0.5) * 0.25 - 0.2,
+      opacity: Math.random() * 0.5 + 0.2,
       pulseSpeed: Math.random() * 0.02 + 0.008,
-      hue: Math.random() > 0.4 ? 42 : 36 // Teintes ambre et or
+      hue: Math.random() > 0.4 ? 40 : 35
     }));
-
-    let mouseX = width / 2;
-    let mouseY = height / 2;
-
-    const handleMouseMove = (e) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseX = e.clientX - rect.left;
-      mouseY = e.clientY - rect.top;
-    };
-    window.addEventListener('mousemove', handleMouseMove);
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
       particles.forEach(p => {
-        // Mouvement naturel avec brise douce
         p.x += p.speedX;
         p.y += p.speedY;
 
-        // Interaction douce avec la souris (effet de brise créée par le passage)
-        const dx = mouseX - p.x;
-        const dy = mouseY - p.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 140) {
-          p.x -= (dx / dist) * 0.6;
-          p.y -= (dy / dist) * 0.6;
-        }
-
-        // Recyclage des particules
         if (p.x < -10) p.x = width + 10;
         if (p.x > width + 10) p.x = -10;
         if (p.y < -10) p.y = height + 10;
         if (p.y > height + 10) p.y = -10;
 
-        p.opacity += Math.sin(Date.now() * p.pulseSpeed) * 0.005;
-        const safeOpacity = Math.max(0.15, Math.min(0.85, p.opacity));
+        p.opacity += Math.sin(Date.now() * p.pulseSpeed) * 0.004;
+        const safeOpacity = Math.max(0.15, Math.min(0.75, p.opacity));
 
-        // Rendu du grain de pollen avec halo bokeh
-        const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 2.2);
+        const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 2);
         gradient.addColorStop(0, `hsla(${p.hue}, 95%, 60%, ${safeOpacity})`);
-        gradient.addColorStop(0.5, `hsla(${p.hue}, 90%, 50%, ${safeOpacity * 0.4})`);
+        gradient.addColorStop(0.5, `hsla(${p.hue}, 90%, 50%, ${safeOpacity * 0.3})`);
         gradient.addColorStop(1, `hsla(${p.hue}, 80%, 40%, 0)`);
 
         ctx.fillStyle = gradient;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * 2.2, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, p.size * 2, 0, Math.PI * 2);
         ctx.fill();
       });
 
@@ -371,7 +337,6 @@ function GoldenPollenCanvas() {
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -379,107 +344,18 @@ function GoldenPollenCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none z-10 opacity-70"
+      className="absolute inset-0 w-full h-full pointer-events-none z-10 opacity-60"
     />
   );
 }
 
 // ============================================================================
-// COMPOSANT 2 : GÉNÉRATEUR SONORE DE NATURE & RUCHERS (WEB AUDIO SYNTHÉ)
-// ============================================================================
-function NatureAudioToggle() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioCtxRef = useRef(null);
-  const gainNodeRef = useRef(null);
-
-  const toggleSound = () => {
-    if (isPlaying) {
-      if (audioCtxRef.current) {
-        audioCtxRef.current.close();
-        audioCtxRef.current = null;
-      }
-      setIsPlaying(false);
-    } else {
-      try {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        const ctx = new AudioContext();
-        audioCtxRef.current = ctx;
-
-        // Générateur de brise douce (bruit filtré rose/brun)
-        const bufferSize = ctx.sampleRate * 2;
-        const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-        const output = noiseBuffer.getChannelData(0);
-        let b0 = 0, b1 = 0, b2 = 0;
-        for (let i = 0; i < bufferSize; i++) {
-          const white = Math.random() * 2 - 1;
-          b0 = 0.99886 * b0 + white * 0.0555179;
-          b1 = 0.99332 * b1 + white * 0.0750759;
-          b2 = 0.96900 * b2 + white * 0.1538520;
-          output[i] = (b0 + b1 + b2) * 0.05;
-        }
-
-        const whiteNoise = ctx.createBufferSource();
-        whiteNoise.buffer = noiseBuffer;
-        whiteNoise.loop = true;
-
-        const filter = ctx.createBiquadFilter();
-        filter.type = 'lowpass';
-        filter.frequency.value = 420;
-
-        const gainNode = ctx.createGain();
-        gainNode.gain.setValueAtTime(0.18, ctx.currentTime);
-        gainNodeRef.current = gainNode;
-
-        whiteNoise.connect(filter);
-        filter.connect(gainNode);
-        gainNode.connect(ctx.destination);
-        whiteNoise.start();
-
-        setIsPlaying(true);
-      } catch (e) {
-        console.error("Audio Web non supporté", e);
-      }
-    }
-  };
-
-  useEffect(() => {
-    return () => {
-      if (audioCtxRef.current) {
-        audioCtxRef.current.close();
-      }
-    };
-  }, []);
-
-  return (
-    <button
-      type="button"
-      onClick={toggleSound}
-      title={isPlaying ? "Couper l'ambiance nature" : "Activer la brise des ruchers de l'Atlas"}
-      className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 hover:bg-white text-[#1E130A] border border-[#D97706]/30 text-xs font-semibold shadow-sm transition-all group"
-    >
-      {isPlaying ? (
-        <>
-          <Volume2 className="w-4 h-4 text-[#D97706] animate-pulse" />
-          <span className="text-[11px] font-bold text-[#D97706]">Nature : En direct</span>
-        </>
-      ) : (
-        <>
-          <VolumeX className="w-4 h-4 text-[#9CA3AF] group-hover:text-[#D97706]" />
-          <span className="text-[11px] text-[#6B7280]">Ambiance Rucher</span>
-        </>
-      )}
-    </button>
-  );
-}
-
-// ============================================================================
-// COMPOSANT PRINCIPAL : APP
+// COMPOSANT PRINCIPAL : APP (INOBEE SARL)
 // ============================================================================
 export default function App() {
   const [products, setProducts] = useState(DEFAULT_PRODUCTS);
   const [activeFilter, setActiveFilter] = useState('all');
-  const [activeTerroir, setActiveTerroir] = useState('anti-atlas');
-  const [diagnosticGoal, setDiagnosticGoal] = useState('immunity');
+  const [guideGoal, setGuideGoal] = useState('immunity');
 
   // Sélections de grammages par produit
   const [selectedWeights, setSelectedWeights] = useState({
@@ -490,7 +366,7 @@ export default function App() {
     'pack-terroir': 750
   });
 
-  // Panier
+  // Panier avec persistance locale
   const [cart, setCart] = useState(() => {
     try {
       const saved = localStorage.getItem('inobee_luxury_cart');
@@ -500,14 +376,14 @@ export default function App() {
     }
   });
 
-  // États UI
+  // États Interface
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const [orderConfirmed, setOrderConfirmed] = useState(null);
   const [toastMessage, setToastMessage] = useState(null);
 
-  // Formulaire & API
+  // Formulaire & Code Promo
   const [couponCode, setCouponCode] = useState('');
   const [appliedDiscount, setAppliedDiscount] = useState(0);
   const [couponError, setCouponError] = useState('');
@@ -523,7 +399,7 @@ export default function App() {
   });
   const [formErrors, setFormErrors] = useState({});
 
-  // Synchronisation backend
+  // Synchronisation avec l'API Backend Express
   useEffect(() => {
     let isMounted = true;
     async function fetchProducts() {
@@ -536,14 +412,14 @@ export default function App() {
           }
         }
       } catch (err) {
-        // Fallback immédiat
+        // Fallback local instantané
       }
     }
     fetchProducts();
     return () => { isMounted = false; };
   }, []);
 
-  // Sauvegarde panier LocalStorage
+  // Sauvegarde panier dans LocalStorage
   useEffect(() => {
     try {
       localStorage.setItem('inobee_luxury_cart', JSON.stringify(cart));
@@ -617,7 +493,7 @@ export default function App() {
       ];
     });
 
-    triggerToast(`🌿 Récolte ajoutée : ${product.name} (${product.isPack ? 'Coffret' : `${weight}g`})`);
+    triggerToast(`Ajouté au panier : ${product.name} (${product.isPack ? 'Coffret' : `${weight}g`})`);
   };
 
   const updateQuantity = (cartItemId, delta) => {
@@ -638,7 +514,7 @@ export default function App() {
     setCart(prev => prev.filter(item => item.id !== cartItemId));
   };
 
-  // Validation Code Promo via API
+  // Validation Code Promo via API Backend
   const handleApplyCoupon = async (e) => {
     e.preventDefault();
     setCouponError('');
@@ -694,7 +570,7 @@ export default function App() {
     return Object.keys(errors).length === 0;
   };
 
-  // Commande COD via Backend Express
+  // Envoi Commande COD via Backend Express
   const handleConfirmOrderCOD = async (e) => {
     e.preventDefault();
     if (cart.length === 0) {
@@ -767,19 +643,19 @@ export default function App() {
 
   const generateWhatsAppUrl = () => {
     const phone = '212600000000';
-    let message = `Bonjour Inobee SARL,\n\nJe souhaite commander du miel pur récolté en pleine nature :\n\n`;
+    let message = `Bonjour Inobee SARL,\n\nJe souhaite passer une commande directe de miel pur :\n\n`;
     cart.forEach(item => {
       const weightLabel = item.isPack ? 'Coffret 3×250g' : `${item.weight}g`;
       message += `• ${item.quantity}x ${item.name} (${weightLabel}) = ${item.price * item.quantity} MAD\n`;
     });
     message += `\nSous-total : ${cartSubtotal} MAD`;
-    if (discountAmount > 0) message += `\nRemise : -${discountAmount} MAD`;
-    message += `\nLivraison : ${shippingCost === 0 ? 'Gratuite (Dès 400 MAD)' : '35 MAD'}`;
-    message += `\n*TOTAL NET : ${cartTotal} MAD*\n\n`;
+    if (discountAmount > 0) message += `\nRemise Code Promo : -${discountAmount} MAD`;
+    message += `\nLivraison : ${shippingCost === 0 ? 'Gratuite (Offerte dès 400 MAD)' : '35 MAD'}`;
+    message += `\n*TOTAL NET À RÉGLER : ${cartTotal} MAD*\n\n`;
     if (checkoutData.fullName || checkoutData.phone) {
-      message += `*Coordonnées :*\nNom : ${checkoutData.fullName || 'Non précisé'}\nTél : ${checkoutData.phone || 'Non précisé'}\nVille : ${checkoutData.city}\nAdresse : ${checkoutData.address || 'À préciser'}\n\n`;
+      message += `*Coordonnées de livraison :*\nNom : ${checkoutData.fullName || 'Non précisé'}\nTél : ${checkoutData.phone || 'Non précisé'}\nVille : ${checkoutData.city}\nAdresse : ${checkoutData.address || 'À préciser'}\n\n`;
     }
-    message += `Paiement en espèces à la livraison.`;
+    message += `Mode de règlement : Espèces à la livraison.`;
     return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
   };
 
@@ -788,32 +664,32 @@ export default function App() {
     return products.filter(p => p.category === activeFilter);
   }, [products, activeFilter]);
 
-  // Recommandation intelligente du Diagnostic Miel
+  // Recommandation du Guide de Choix
   const recommendedProduct = useMemo(() => {
-    if (diagnosticGoal === 'immunity') return products.find(p => p.id === 'daghmous') || products[0];
-    if (diagnosticGoal === 'energy') return products.find(p => p.id === 'sidr') || products[2];
-    if (diagnosticGoal === 'sleep') return products.find(p => p.id === 'oranger') || products[3];
+    if (guideGoal === 'immunity') return products.find(p => p.id === 'daghmous') || products[0];
+    if (guideGoal === 'energy') return products.find(p => p.id === 'sidr') || products[2];
+    if (guideGoal === 'sleep') return products.find(p => p.id === 'oranger') || products[3];
     return products.find(p => p.id === 'pack-terroir') || products[4];
-  }, [products, diagnosticGoal]);
+  }, [products, guideGoal]);
 
   return (
     <div className="min-h-screen bg-[#FAF7F2] text-[#1F2937] font-sans antialiased selection:bg-[#D97706]/20 selection:text-[#1E130A] honeycomb-pattern relative">
       
       {/* ====================================================================
-          1. HEADER AVEC AMBIANCE NATURE & NAVIGATION FLUIDE
+          1. TOP ANNOUNCEMENT BAR
           ==================================================================== */}
-      <div className="bg-[#140C06] text-[#FAF7F2] text-[11px] sm:text-xs font-medium py-2 px-4 tracking-wide border-b border-[#D97706]/25 relative z-50">
+      <div className="bg-[#140C06] text-[#FAF7F2] text-[11px] sm:text-xs font-medium py-2.5 px-4 tracking-wide border-b border-[#D97706]/25 relative z-50">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2 mx-auto sm:mx-0">
             <span className="w-2 h-2 rounded-full bg-[#15803D] animate-ping"></span>
             <span>
-              <strong>Livraison gratuite</strong> partout au Maroc dès 400 MAD • Paiement à la livraison
+              <strong>Inobee SARL</strong> • Livraison gratuite partout au Maroc dès 400 MAD • Paiement à la livraison
             </span>
           </div>
           <div className="hidden sm:flex items-center gap-4 text-[#D97706]">
             <span className="flex items-center gap-1.5">
-              <Flower2 className="w-3.5 h-3.5 text-[#F59E0B]" />
-              <span>Butiné à 1 400m d'Altitude</span>
+              <ShieldCheck className="w-3.5 h-3.5 text-[#15803D]" />
+              <span className="text-[#FAF7F2]/90">Miel 100% Brut Non Pasteurisé</span>
             </span>
             <span>•</span>
             <span className="text-[#FAF7F2]/80">Expédition 24/48h</span>
@@ -821,16 +697,19 @@ export default function App() {
         </div>
       </div>
 
-      <header className="sticky top-0 z-40 bg-[#FAF7F2]/90 backdrop-blur-xl border-b border-[#E8E1D5]/80 transition-all">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      {/* ====================================================================
+          2. STICKY NAVBAR AVEC LOGO OFFICIEL INOBEE SARL PROÉMINENT
+          ==================================================================== */}
+      <header className="sticky top-0 z-40 bg-[#FAF7F2]/95 backdrop-blur-xl border-b border-[#E8E1D5] transition-all">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 sm:h-24 flex items-center justify-between">
           
-          {/* Logo Officiel Inobee SARL */}
-          <a href="#" className="flex items-center gap-3.5 group">
-            <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-[#FAF7F2] via-white to-[#F5EBD6] p-1.5 border border-[#D97706]/40 shadow-sm flex items-center justify-center overflow-hidden group-hover:border-[#D97706] transition-colors">
+          {/* Logo Officiel Inobee SARL — Mise en valeur nette et professionnelle */}
+          <a href="#" className="flex items-center gap-3.5 sm:gap-4 group">
+            <div className="relative h-14 sm:h-16 w-14 sm:w-16 flex items-center justify-center shrink-0">
               <img
                 src="assets/logo.png"
-                alt="Inobee SARL Logo"
-                className="w-full h-full object-contain transition-transform group-hover:scale-105 duration-300"
+                alt="Inobee SARL — Logo Officiel"
+                className="max-h-full max-w-full object-contain drop-shadow-[0_2px_8px_rgba(217,119,6,0.3)] transition-transform group-hover:scale-105 duration-300"
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
                   const fallback = e.currentTarget.parentElement?.querySelector('.logo-svg-fallback');
@@ -838,50 +717,43 @@ export default function App() {
                 }}
               />
               <div className="logo-svg-fallback hidden text-[#D97706]">
-                <Droplets className="w-6 h-6 fill-[#D97706]" />
+                <Droplets className="w-8 h-8 fill-[#D97706]" />
               </div>
             </div>
+
             <div className="flex flex-col">
-              <div className="flex items-center gap-1.5">
-                <span className="font-serif text-2xl font-bold tracking-tight text-[#1E130A] leading-none">
+              <div className="flex items-center gap-2">
+                <span className="font-serif text-2xl sm:text-3xl font-extrabold tracking-tight text-[#1E130A] leading-none">
                   INOBEE
                 </span>
-                <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#15803D]/10 text-[#15803D]">
-                  BIO
+                <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#D97706]/15 text-[#D97706] border border-[#D97706]/30 uppercase">
+                  SARL
                 </span>
               </div>
-              <span className="text-[9px] tracking-[0.25em] text-[#D97706] font-semibold uppercase mt-0.5">
-                Maison Apicole · SARL
+              <span className="text-[10px] sm:text-[11px] tracking-wider text-[#D97706] font-semibold uppercase mt-1">
+                Société de Miel Pur & Apithérapie
               </span>
             </div>
           </a>
 
-          {/* Navigation Liens Desktop */}
-          <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-[#4B5563]">
-            <a href="#boutique" className="hover:text-[#D97706] transition-colors flex items-center gap-1">
-              <span>Boutique</span>
-            </a>
+          {/* Navigation Desktop Commerciale */}
+          <nav className="hidden lg:flex items-center gap-8 text-sm font-semibold text-[#4B5563]">
+            <a href="#boutique" className="hover:text-[#D97706] transition-colors">Nos Miels</a>
             <a href="#terroirs" className="hover:text-[#D97706] transition-colors flex items-center gap-1">
               <Mountain className="w-3.5 h-3.5 text-[#D97706]" />
               <span>Terroirs de l'Atlas</span>
             </a>
-            <a href="#diagnostic" className="hover:text-[#D97706] transition-colors flex items-center gap-1">
-              <Sparkles className="w-3.5 h-3.5 text-[#F59E0B]" />
-              <span>Diagnostic Santé</span>
-            </a>
-            <a href="#histoire" className="hover:text-[#D97706] transition-colors">Notre Histoire</a>
-            <a href="#avis" className="hover:text-[#D97706] transition-colors">Avis</a>
+            <a href="#guide" className="hover:text-[#D97706] transition-colors">Guide de Choix</a>
+            <a href="#societe" className="hover:text-[#D97706] transition-colors">La Société</a>
+            <a href="#avis" className="hover:text-[#D97706] transition-colors">Avis Clients</a>
+            <a href="#contact" className="hover:text-[#D97706] transition-colors">Contact</a>
           </nav>
 
-          {/* Contrôles : Toggle Son Ambiance Nature & Panier Dynamique */}
+          {/* Bouton Panier Dynamique */}
           <div className="flex items-center gap-3">
-            <div className="hidden sm:block">
-              <NatureAudioToggle />
-            </div>
-
             <button
               onClick={() => setIsCartOpen(true)}
-              className="flex items-center gap-2.5 bg-[#1E130A] hover:bg-[#2A1B0E] text-[#FAF7F2] px-4 py-2.5 rounded-full transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 group relative overflow-hidden"
+              className="flex items-center gap-2.5 bg-[#1E130A] hover:bg-[#2A1B0E] text-[#FAF7F2] px-4 py-2.5 rounded-full transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 group"
               aria-label="Ouvrir le panier"
             >
               <div className="relative">
@@ -911,23 +783,23 @@ export default function App() {
         {/* Menu Mobile */}
         {isMobileMenuOpen && (
           <div className="lg:hidden bg-[#FAF7F2] border-b border-[#E8E1D5] px-6 py-4 space-y-3">
-            <div className="pb-2 border-b border-[#E8E1D5]">
-              <NatureAudioToggle />
-            </div>
             <a href="#boutique" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-semibold text-[#1E130A] py-1">
-              Boutique des Miels
+              Nos Miels Purs
             </a>
             <a href="#terroirs" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-semibold text-[#1E130A] py-1">
               Terroirs de l'Atlas
             </a>
-            <a href="#diagnostic" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-semibold text-[#1E130A] py-1">
-              Diagnostic Santé & Miel
+            <a href="#guide" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-semibold text-[#1E130A] py-1">
+              Guide de Choix
             </a>
-            <a href="#histoire" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-semibold text-[#1E130A] py-1">
-              Notre Savoir-Faire
+            <a href="#societe" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-semibold text-[#1E130A] py-1">
+              La Société Inobee SARL
             </a>
             <a href="#avis" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-semibold text-[#1E130A] py-1">
               Avis Clients Vérifiés
+            </a>
+            <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-semibold text-[#1E130A] py-1">
+              Contact & Expéditions
             </a>
           </div>
         )}
@@ -935,65 +807,62 @@ export default function App() {
 
       <main>
         {/* ====================================================================
-            2. HERO SECTION VIVANTE AVEC PARTICULES DE POLLEN ET MOTION 3D
+            3. HERO SECTION : IDENTITÉ & VALEUR COMMERCIALE
             ==================================================================== */}
         <section className="relative overflow-hidden pt-8 pb-16 lg:pt-16 lg:pb-24 border-b border-[#E8E1D5] bg-gradient-to-b from-[#FAF7F2] via-[#FAF4E8] to-[#FAF7F2]">
-          
-          {/* Moteur de Particules de Pollen Luminous Canvas */}
           <GoldenPollenCanvas />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               
-              {/* Colonne Gauche : Storytelling Vivant */}
+              {/* Colonne Gauche : Proposition de Valeur */}
               <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
                 
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#D97706]/10 border border-[#D97706]/30 text-[#D97706] text-xs font-bold tracking-wide shadow-sm backdrop-blur-md">
-                  <Wind className="w-3.5 h-3.5 text-[#D97706] animate-pulse" />
-                  <span>Récoltes Sauvages & Flore Médicinale de l'Atlas</span>
+                <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/90 border border-[#D97706]/40 text-[#1E130A] text-xs font-bold tracking-wide shadow-sm">
+                  <span className="w-2 h-2 rounded-full bg-[#15803D]"></span>
+                  <span>Inobee SARL • Miels Purs Récoltés au Maroc</span>
                 </div>
 
-                <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-[#1E130A] tracking-tight leading-[1.12]">
-                  Le Vrai Miel Brut du Maroc, <span className="text-[#D97706] italic font-normal">Façonné par la Nature.</span>
+                <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-[#1E130A] tracking-tight leading-[1.14]">
+                  Le Vrai Miel Brut du Maroc, <span className="text-[#D97706] italic font-normal">Directement du Rucher à Votre Table.</span>
                 </h1>
 
                 <p className="text-base sm:text-lg text-[#4B5563] max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
-                  100% pur, extrait mécaniquement à froid sans chauffage. Récolté avec respect des abeilles dans les sanctuaires sauvages de l'Atlas et du Souss.
+                  La société <strong>Inobee SARL</strong> récolte et conditionne des miels 100% purs et bruts, extraits mécaniquement à froid sans chauffage, garantis sans sucre ajouté et livrés partout au Maroc.
                 </p>
 
-                {/* CTAs avec effet Glow doré */}
+                {/* CTAs */}
                 <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
                   <a
                     href="#boutique"
-                    className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-[#D97706] to-[#B45309] hover:from-[#B45309] hover:to-[#92400E] text-white text-sm font-bold tracking-wide shadow-xl shadow-[#D97706]/30 transition-all duration-300 flex items-center justify-center gap-2.5 group hover:-translate-y-0.5"
+                    className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#D97706] hover:bg-[#B45309] text-white text-sm font-bold tracking-wide shadow-xl shadow-[#D97706]/30 transition-all duration-300 flex items-center justify-center gap-2 group hover:-translate-y-0.5"
                   >
-                    <span>Commander Maintenant</span>
+                    <span>Commander Nos Miels</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
                   </a>
                   <a
-                    href="#terroirs"
-                    className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white/80 hover:bg-white text-[#1E130A] text-sm font-semibold border border-[#E8E1D5] shadow-sm backdrop-blur-md transition-all text-center flex items-center justify-center gap-2"
+                    href="#societe"
+                    className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white hover:bg-[#FAF7F2] text-[#1E130A] text-sm font-semibold border border-[#E8E1D5] shadow-sm transition-all text-center"
                   >
-                    <Compass className="w-4 h-4 text-[#D97706]" />
-                    <span>Explorer les Terroirs</span>
+                    Découvrir Inobee SARL
                   </a>
                 </div>
 
-                {/* 4 Badges de Confiance Terroir */}
+                {/* 4 Badges de Confiance Société */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-[#E8E1D5]/80">
-                  <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-[#E8E1D5] backdrop-blur-sm shadow-sm hover:border-[#D97706]/40 transition-colors">
+                  <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-[#E8E1D5] shadow-sm">
                     <CheckCircle2 className="w-4 h-4 text-[#15803D] shrink-0" />
                     <span className="text-xs font-semibold text-[#1E130A]">100% Naturel & Brut</span>
                   </div>
-                  <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-[#E8E1D5] backdrop-blur-sm shadow-sm hover:border-[#D97706]/40 transition-colors">
+                  <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-[#E8E1D5] shadow-sm">
                     <Award className="w-4 h-4 text-[#D97706] shrink-0" />
                     <span className="text-xs font-semibold text-[#1E130A]">Analysé en Labo</span>
                   </div>
-                  <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-[#E8E1D5] backdrop-blur-sm shadow-sm hover:border-[#D97706]/40 transition-colors">
+                  <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-[#E8E1D5] shadow-sm">
                     <Banknote className="w-4 h-4 text-[#15803D] shrink-0" />
                     <span className="text-xs font-semibold text-[#1E130A]">Paiement à la Livraison</span>
                   </div>
-                  <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-[#E8E1D5] backdrop-blur-sm shadow-sm hover:border-[#D97706]/40 transition-colors">
+                  <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-[#E8E1D5] shadow-sm">
                     <Truck className="w-4 h-4 text-[#D97706] shrink-0" />
                     <span className="text-xs font-semibold text-[#1E130A]">Livraison 24/48h</span>
                   </div>
@@ -1001,29 +870,36 @@ export default function App() {
 
               </div>
 
-              {/* Colonne Droite : Pot de Miel de Luxe avec Animation Flottante */}
+              {/* Colonne Droite : Pot de Miel de Luxe avec Logo Officiel en Sceau d'Authenticité */}
               <div className="lg:col-span-5 relative flex justify-center">
-                <div className="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-gradient-to-br from-[#FAF7F2] to-[#E8E1D5] group card-luxury-hover animate-float-slow">
+                <div className="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-gradient-to-br from-[#FAF7F2] to-[#E8E1D5] group card-luxury-hover">
                   <img
                     src="assets/img/product-daghmous.jpg"
-                    alt="Miel Brut Inobee SARL"
+                    alt="Miel Pur Inobee SARL"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
                     onError={(e) => {
                       e.currentTarget.src = FALLBACK_IMAGES.hero;
                     }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#140C06]/80 via-transparent to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#140C06]/85 via-transparent to-transparent"></div>
                   
-                  {/* Badge Altitude Flottant */}
-                  <div className="absolute top-5 right-5 px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-[#D97706]/30 shadow-md flex items-center gap-1.5 text-xs font-bold text-[#1E130A]">
-                    <Mountain className="w-3.5 h-3.5 text-[#D97706]" />
-                    <span>Altitude : 1 400 m</span>
+                  {/* Sceau d'Authenticité Officiel avec Logo */}
+                  <div className="absolute top-5 left-5 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-[#D97706]/40 shadow-lg flex items-center gap-2.5">
+                    <img
+                      src="assets/logo.png"
+                      alt="Logo Inobee"
+                      className="w-7 h-7 object-contain"
+                    />
+                    <div>
+                      <span className="text-[10px] font-bold text-[#1E130A] block leading-none">Inobee SARL</span>
+                      <span className="text-[8px] tracking-wider text-[#D97706] font-bold uppercase">Sceau d'Authenticité</span>
+                    </div>
                   </div>
 
-                  {/* Pastille Terroir Sensorielle */}
+                  {/* Pastille Basse */}
                   <div className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-white/40 shadow-xl flex items-center justify-between">
                     <div>
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-[#D97706]">Récolte Sauvage 2026</p>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-[#D97706]">Récolte Fraîche 2026</p>
                       <p className="font-serif text-sm font-bold text-[#1E130A]">Miel d'Euphorbe & Thym de l'Atlas</p>
                       <p className="text-[11px] text-[#6B7280]">Non pasteurisé · Extraction centrifuge à froid</p>
                     </div>
@@ -1039,204 +915,7 @@ export default function App() {
         </section>
 
         {/* ====================================================================
-            3. SECTION INTERACTIVE : VOYAGE AU CŒUR DES TERROIRS SAUVAGES
-            ==================================================================== */}
-        <section id="terroirs" className="py-20 sm:py-28 bg-[#1E130A] text-[#FAF7F2] relative overflow-hidden honeycomb-dark">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
-            
-            <div className="text-center max-w-3xl mx-auto mb-14">
-              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#F59E0B] block mb-2">
-                Géographie & Biodiversité Mellifère
-              </span>
-              <h2 className="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-white">
-                Les 3 Sanctuaires de l'Apiculture Inobee
-              </h2>
-              <p className="text-sm sm:text-base text-white/70 mt-3 font-light">
-                Le goût et les vertus de nos miels sont l'empreinte directe des sols, des altitudes et du climat marocain.
-              </p>
-            </div>
-
-            {/* Sélecteur de Terroirs Interactif */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {TERROIRS.map((t) => {
-                const isSelected = activeTerroir === t.id;
-                return (
-                  <div
-                    key={t.id}
-                    onClick={() => setActiveTerroir(t.id)}
-                    className={`cursor-pointer rounded-3xl p-6 transition-all duration-300 border ${
-                      isSelected
-                        ? 'bg-gradient-to-b from-[#2E1D10] to-[#1E130A] border-[#D97706] shadow-2xl shadow-[#D97706]/15 -translate-y-2'
-                        : 'bg-white/5 border-white/10 hover:border-white/30 hover:bg-white/10'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-xs font-mono font-bold text-[#F59E0B] px-2.5 py-1 rounded-full bg-[#D97706]/20 border border-[#D97706]/30">
-                        {t.altitude}
-                      </span>
-                      {isSelected && (
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#15803D] animate-ping"></span>
-                      )}
-                    </div>
-
-                    <h3 className="font-serif text-xl font-bold text-white mb-1">
-                      {t.name}
-                    </h3>
-                    <p className="text-xs text-[#D97706] font-semibold mb-3">
-                      {t.title}
-                    </p>
-
-                    <p className="text-xs text-white/70 mb-4 leading-relaxed">
-                      {t.climate}
-                    </p>
-
-                    <div className="pt-4 border-t border-white/10 text-xs space-y-1.5">
-                      <p className="text-white/50 uppercase text-[10px] font-bold tracking-wider">Flore Butinée :</p>
-                      <p className="text-white/90 italic">{t.botany}</p>
-                    </div>
-
-                    <div className="mt-5 pt-3 flex items-center justify-between text-xs text-[#F59E0B] font-bold">
-                      <span>Découvrir le miel de cette région</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-          </div>
-        </section>
-
-        {/* ====================================================================
-            4. DIAGNOSTIC SANTÉ & NATURE : TROUVEZ VOTRE MIEL IDÉAL
-            ==================================================================== */}
-        <section id="diagnostic" className="py-16 sm:py-24 bg-[#FAF7F2] border-b border-[#E8E1D5]">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-white rounded-3xl p-6 sm:p-10 border border-[#E8E1D5] shadow-xl relative overflow-hidden">
-              
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-                <div>
-                  <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#D97706] mb-1">
-                    <Sparkles className="w-3.5 h-3.5" />
-                    <span>Diagnostic Apithérapie Personnalisé</span>
-                  </div>
-                  <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#1E130A]">
-                    Quel Bienfait Naturel Recherchez-Vous ?
-                  </h3>
-                </div>
-                <span className="text-xs text-[#6B7280]">Résultat instantané en 1 clic</span>
-              </div>
-
-              {/* Boutons d'objectifs de santé */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
-                <button
-                  type="button"
-                  onClick={() => setDiagnosticGoal('immunity')}
-                  className={`p-3.5 rounded-2xl text-left border transition-all ${
-                    diagnosticGoal === 'immunity'
-                      ? 'bg-[#1E130A] text-white border-[#1E130A] shadow-md'
-                      : 'bg-[#FAF7F2] text-[#374151] border-[#E8E1D5] hover:border-[#D97706]'
-                  }`}
-                >
-                  <span className="text-lg block mb-1">🛡️</span>
-                  <p className="text-xs font-bold leading-snug">Immunité & Gorge</p>
-                  <p className="text-[10px] opacity-75 mt-0.5">Refroidissements & ORL</p>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setDiagnosticGoal('energy')}
-                  className={`p-3.5 rounded-2xl text-left border transition-all ${
-                    diagnosticGoal === 'energy'
-                      ? 'bg-[#1E130A] text-white border-[#1E130A] shadow-md'
-                      : 'bg-[#FAF7F2] text-[#374151] border-[#E8E1D5] hover:border-[#D97706]'
-                  }`}
-                >
-                  <span className="text-lg block mb-1">⚡</span>
-                  <p className="text-xs font-bold leading-snug">Énergie & Tonus</p>
-                  <p className="text-[10px] opacity-75 mt-0.5">Récupération physique</p>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setDiagnosticGoal('sleep')}
-                  className={`p-3.5 rounded-2xl text-left border transition-all ${
-                    diagnosticGoal === 'sleep'
-                      ? 'bg-[#1E130A] text-white border-[#1E130A] shadow-md'
-                      : 'bg-[#FAF7F2] text-[#374151] border-[#E8E1D5] hover:border-[#D97706]'
-                  }`}
-                >
-                  <span className="text-lg block mb-1">🌸</span>
-                  <p className="text-xs font-bold leading-snug">Douceur & Sommeil</p>
-                  <p className="text-[10px] opacity-75 mt-0.5">Enfants & Sérénité</p>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setDiagnosticGoal('gift')}
-                  className={`p-3.5 rounded-2xl text-left border transition-all ${
-                    diagnosticGoal === 'gift'
-                      ? 'bg-[#1E130A] text-white border-[#1E130A] shadow-md'
-                      : 'bg-[#FAF7F2] text-[#374151] border-[#E8E1D5] hover:border-[#D97706]'
-                  }`}
-                >
-                  <span className="text-lg block mb-1">🎁</span>
-                  <p className="text-xs font-bold leading-snug">Cadeau & Découverte</p>
-                  <p className="text-[10px] opacity-75 mt-0.5">Trio 3 nectars avec cuillère</p>
-                </button>
-              </div>
-
-              {/* Carte Recommandation Dynamique */}
-              {recommendedProduct && (
-                <div className="p-6 rounded-2xl bg-[#FAF7F2] border border-[#E8E1D5] flex flex-col md:flex-row items-center justify-between gap-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-20 h-20 rounded-2xl overflow-hidden bg-white shrink-0 border border-[#E8E1D5]">
-                      <img
-                        src={recommendedProduct.image}
-                        alt={recommendedProduct.name}
-                        className="w-full h-full object-cover"
-                        onError={(e) => { e.currentTarget.src = recommendedProduct.fallbackImage; }}
-                      />
-                    </div>
-                    <div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#D97706]">
-                        Recommandation Inobee pour votre profil :
-                      </span>
-                      <h4 className="font-serif text-lg font-bold text-[#1E130A]">
-                        {recommendedProduct.name}
-                      </h4>
-                      <p className="text-xs text-[#6B7280]">
-                        {recommendedProduct.tagline} • Terroir : {recommendedProduct.terroir}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-3 w-full md:w-auto">
-                    <button
-                      type="button"
-                      onClick={() => setQuickViewProduct(recommendedProduct)}
-                      className="flex-1 md:flex-none px-4 py-3 rounded-xl bg-white hover:bg-[#FAF7F2] text-xs font-bold text-[#1E130A] border border-[#E8E1D5] transition-colors text-center"
-                    >
-                      Voir les Bienfaits
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => addToCart(recommendedProduct)}
-                      className="flex-1 md:flex-none px-6 py-3 rounded-xl bg-[#D97706] hover:bg-[#B45309] text-white text-xs font-bold shadow-md transition-all flex items-center justify-center gap-1.5"
-                    >
-                      <Plus className="w-4 h-4" />
-                      <span>Ajouter au Panier</span>
-                    </button>
-                  </div>
-                </div>
-              )}
-
-            </div>
-          </div>
-        </section>
-
-        {/* ====================================================================
-            5. BOUTIQUE DES NECTARS AVEC CARTES 3D & SÉLECTEUR DE POIDS
+            4. BOUTIQUE OFFICIELLE DES MIELS INOBEE SARL
             ==================================================================== */}
         <section id="boutique" className="py-16 sm:py-24 bg-white border-b border-[#E8E1D5]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1244,13 +923,13 @@ export default function App() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
               <div>
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#D97706] block mb-2">
-                  La Collection Inobee SARL
+                  Catalogue Officiel de la Société
                 </span>
                 <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#1E130A] tracking-tight">
-                  Nos Nectars d’Exception
+                  Nos Miels Purs du Terroir Marocain
                 </h2>
                 <p className="text-sm sm:text-base text-[#6B7280] mt-1">
-                  Sélectionnez votre variété et choisissez le format adapté à votre consommation.
+                  Tous nos miels sont conditionnés dans des pots en verre scellés avec garantie d'origine.
                 </p>
               </div>
 
@@ -1332,16 +1011,9 @@ export default function App() {
                         )}
                       </div>
 
-                      {product.altitude && (
-                        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-bold text-[#1E130A] border border-white/60 flex items-center gap-1 shadow-sm">
-                          <Mountain className="w-3 h-3 text-[#D97706]" />
-                          <span>{product.altitude}</span>
-                        </div>
-                      )}
-
                       <div className="absolute bottom-3 left-3 right-3 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/60 text-[11px] text-[#4B5563] font-medium truncate flex items-center justify-between">
                         <span>📍 {product.terroir}</span>
-                        {product.bloom && <span className="text-[10px] text-[#D97706] font-semibold">{product.bloom}</span>}
+                        {product.altitude && <span className="text-[10px] text-[#D97706] font-semibold">{product.altitude}</span>}
                       </div>
                     </div>
 
@@ -1383,13 +1055,13 @@ export default function App() {
                       ) : (
                         <div className="pt-2">
                           <div className="p-2.5 rounded-xl bg-white border border-[#E8E1D5] text-xs text-[#4B5563] flex items-center justify-between">
-                            <span className="font-semibold text-[#1E130A]">Coffret 3 Nectars</span>
-                            <span className="font-mono text-[#D97706] font-bold">3 × 250g</span>
+                            <span className="font-semibold text-[#1E130A]">Coffret 3 Pots</span>
+                            <span className="font-mono text-[#D97706] font-bold">3 × 250g + Cuillère</span>
                           </div>
                         </div>
                       )}
 
-                      {/* Prix & Déclencheur Modale */}
+                      {/* Prix & Bouton Modal */}
                       <div className="pt-2 flex items-baseline justify-between border-t border-[#E8E1D5]">
                         <div className="flex items-baseline gap-2">
                           <span className="font-serif text-2xl font-bold text-[#1E130A]">
@@ -1432,43 +1104,240 @@ export default function App() {
         </section>
 
         {/* ====================================================================
-            6. QUI SOMMES-NOUS ? (SAVOIR-FAIRE APICOLE & 3 PILIERS)
+            5. GUIDE DE CHOIX : TROUVEZ LE MIEL ADAPTÉ À VOTRE BESOIN
             ==================================================================== */}
-        <section id="histoire" className="py-20 sm:py-28 bg-[#FAF7F2] border-b border-[#E8E1D5]">
+        <section id="guide" className="py-16 sm:py-24 bg-[#FAF7F2] border-b border-[#E8E1D5]">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-white rounded-3xl p-6 sm:p-10 border border-[#E8E1D5] shadow-xl">
+              
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                <div>
+                  <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#D97706] mb-1">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>Guide de Dégustation Inobee SARL</span>
+                  </div>
+                  <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#1E130A]">
+                    Quel miel correspond à votre besoin ?
+                  </h3>
+                </div>
+                <span className="text-xs text-[#6B7280]">Sélectionnez votre objectif :</span>
+              </div>
+
+              {/* Boutons d'objectifs de consommation */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+                <button
+                  type="button"
+                  onClick={() => setGuideGoal('immunity')}
+                  className={`p-3.5 rounded-2xl text-left border transition-all ${
+                    guideGoal === 'immunity'
+                      ? 'bg-[#1E130A] text-white border-[#1E130A] shadow-md'
+                      : 'bg-[#FAF7F2] text-[#374151] border-[#E8E1D5] hover:border-[#D97706]'
+                  }`}
+                >
+                  <span className="text-lg block mb-1">🛡️</span>
+                  <p className="text-xs font-bold leading-snug">Immunité & Voies Respiratoires</p>
+                  <p className="text-[10px] opacity-75 mt-0.5">Action chauffante en gorge</p>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setGuideGoal('energy')}
+                  className={`p-3.5 rounded-2xl text-left border transition-all ${
+                    guideGoal === 'energy'
+                      ? 'bg-[#1E130A] text-white border-[#1E130A] shadow-md'
+                      : 'bg-[#FAF7F2] text-[#374151] border-[#E8E1D5] hover:border-[#D97706]'
+                  }`}
+                >
+                  <span className="text-lg block mb-1">⚡</span>
+                  <p className="text-xs font-bold leading-snug">Énergie, Tonus & Vitalité</p>
+                  <p className="text-[10px] opacity-75 mt-0.5">Miel de Jujubier Sidr</p>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setGuideGoal('sleep')}
+                  className={`p-3.5 rounded-2xl text-left border transition-all ${
+                    guideGoal === 'sleep'
+                      ? 'bg-[#1E130A] text-white border-[#1E130A] shadow-md'
+                      : 'bg-[#FAF7F2] text-[#374151] border-[#E8E1D5] hover:border-[#D97706]'
+                  }`}
+                >
+                  <span className="text-lg block mb-1">🌸</span>
+                  <p className="text-xs font-bold leading-snug">Douceur & Sommeil des Enfants</p>
+                  <p className="text-[10px] opacity-75 mt-0.5">Miel d'Oranger du Souss</p>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setGuideGoal('gift')}
+                  className={`p-3.5 rounded-2xl text-left border transition-all ${
+                    guideGoal === 'gift'
+                      ? 'bg-[#1E130A] text-white border-[#1E130A] shadow-md'
+                      : 'bg-[#FAF7F2] text-[#374151] border-[#E8E1D5] hover:border-[#D97706]'
+                  }`}
+                >
+                  <span className="text-lg block mb-1">🎁</span>
+                  <p className="text-xs font-bold leading-snug">Coffret Découverte Prestige</p>
+                  <p className="text-[10px] opacity-75 mt-0.5">3 nectars avec cuillère offerte</p>
+                </button>
+              </div>
+
+              {/* Carte Recommandation */}
+              {recommendedProduct && (
+                <div className="p-6 rounded-2xl bg-[#FAF7F2] border border-[#E8E1D5] flex flex-col md:flex-row items-center justify-between gap-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-20 h-20 rounded-2xl overflow-hidden bg-white shrink-0 border border-[#E8E1D5]">
+                      <img
+                        src={recommendedProduct.image}
+                        alt={recommendedProduct.name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => { e.currentTarget.src = recommendedProduct.fallbackImage; }}
+                      />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#D97706]">
+                        Recommandation Inobee SARL :
+                      </span>
+                      <h4 className="font-serif text-lg font-bold text-[#1E130A]">
+                        {recommendedProduct.name}
+                      </h4>
+                      <p className="text-xs text-[#6B7280]">
+                        {recommendedProduct.tagline} • Terroir : {recommendedProduct.terroir}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 w-full md:w-auto">
+                    <button
+                      type="button"
+                      onClick={() => setQuickViewProduct(recommendedProduct)}
+                      className="flex-1 md:flex-none px-4 py-3 rounded-xl bg-white hover:bg-[#FAF7F2] text-xs font-bold text-[#1E130A] border border-[#E8E1D5] transition-colors text-center"
+                    >
+                      Voir les Détails
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => addToCart(recommendedProduct)}
+                      className="flex-1 md:flex-none px-6 py-3 rounded-xl bg-[#D97706] hover:bg-[#B45309] text-white text-xs font-bold shadow-md transition-all flex items-center justify-center gap-1.5"
+                    >
+                      <Plus className="w-4 h-4" />
+                      <span>Ajouter au Panier</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+
+            </div>
+          </div>
+        </section>
+
+        {/* ====================================================================
+            6. LES TERROIRS DE L'ATLAS
+            ==================================================================== */}
+        <section id="terroirs" className="py-20 sm:py-24 bg-[#1E130A] text-[#FAF7F2] border-b border-[#D97706]/20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto mb-14">
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#F59E0B] block mb-2">
+                Origine & Géographie
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-white">
+                Les Régions de Récolte Inobee SARL
+              </h2>
+              <p className="text-sm sm:text-base text-white/70 mt-2 font-light">
+                Nous sélectionnons nos ruchers dans des zones préservées de toute pollution agricole ou industrielle.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {TERROIRS.map((t) => (
+                <div
+                  key={t.id}
+                  className="rounded-3xl p-6 bg-white/5 border border-white/10 hover:border-[#D97706]/60 transition-all duration-300"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-xs font-mono font-bold text-[#F59E0B] px-2.5 py-1 rounded-full bg-[#D97706]/20 border border-[#D97706]/30">
+                      {t.altitude}
+                    </span>
+                    <Mountain className="w-4 h-4 text-[#D97706]" />
+                  </div>
+
+                  <h3 className="font-serif text-xl font-bold text-white mb-1">
+                    {t.name}
+                  </h3>
+                  <p className="text-xs text-[#D97706] font-semibold mb-3">
+                    {t.title}
+                  </p>
+
+                  <p className="text-xs text-white/70 mb-4 leading-relaxed">
+                    {t.climate}
+                  </p>
+
+                  <div className="pt-4 border-t border-white/10 text-xs space-y-1">
+                    <p className="text-white/50 uppercase text-[10px] font-bold tracking-wider">Flore Butinée :</p>
+                    <p className="text-white/90 italic">{t.botany}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ====================================================================
+            7. LA SOCIÉTÉ INOBEE SARL : NOTRE HISTOIRE & ENGAGEMENTS
+            ==================================================================== */}
+        <section id="societe" className="py-20 sm:py-28 bg-[#FAF7F2] border-b border-[#E8E1D5]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               
-              <div className="lg:col-span-5 order-2 lg:order-1">
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/5] bg-white group">
+              {/* Logo Officiel Inobee SARL & Photo Rucher */}
+              <div className="lg:col-span-5 order-2 lg:order-1 space-y-6">
+                
+                {/* Carte de Présentation avec Logo Officiel Proéminent */}
+                <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E8E1D5] shadow-xl text-center space-y-4">
+                  <div className="w-24 h-24 sm:w-28 sm:h-28 mx-auto flex items-center justify-center p-2 rounded-2xl bg-[#FAF7F2] border border-[#D97706]/40 shadow-inner">
+                    <img
+                      src="assets/logo.png"
+                      alt="Logo Inobee SARL"
+                      className="max-h-full max-w-full object-contain drop-shadow-[0_2px_8px_rgba(217,119,6,0.3)]"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-serif text-2xl font-bold text-[#1E130A]">Inobee SARL</h3>
+                    <p className="text-xs text-[#D97706] font-semibold tracking-wider uppercase mt-1">
+                      Société Marocaine d'Apiculture & Conditionnement
+                    </p>
+                  </div>
+                  <p className="text-xs text-[#6B7280] leading-relaxed">
+                    Entreprise marocaine immatriculée dédiée à la valorisation des miels bruts d'exception et à la traçabilité intégrale du terroir marocain.
+                  </p>
+                </div>
+
+                <div className="relative rounded-3xl overflow-hidden shadow-lg border-2 border-white aspect-video bg-white">
                   <img
                     src="assets/img/product-sidr.jpg"
                     alt="Rucher Inobee dans l'Atlas"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    onError={(e) => {
-                      e.currentTarget.src = FALLBACK_IMAGES.story;
-                    }}
+                    className="w-full h-full object-cover"
+                    onError={(e) => { e.currentTarget.src = FALLBACK_IMAGES.story; }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#140C06]/85 via-transparent to-transparent"></div>
-                  
-                  <div className="absolute bottom-6 left-6 right-6 text-white space-y-1.5">
-                    <span className="text-xs uppercase font-bold tracking-widest text-[#F59E0B]">Authenticité & Traçabilité</span>
-                    <h3 className="font-serif text-lg font-bold">Ruchers Sauvages de Haute Montagne</h3>
-                    <p className="text-xs text-white/80">Respect du cycle biologique des abeilles marocaines et extraction à froid sous vide contrôlé.</p>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#140C06]/70 via-transparent to-transparent flex items-end p-4">
+                    <span className="text-xs text-white font-medium">Ruchers en zone sauvage préservée de l'Atlas</span>
                   </div>
                 </div>
+
               </div>
 
+              {/* Texte Présentation Société & 3 Piliers */}
               <div className="lg:col-span-7 order-1 lg:order-2 space-y-6">
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#D97706] block">
-                  Notre Savoir-Faire & Vision
+                  À Propos d'Inobee SARL
                 </span>
 
                 <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#1E130A] leading-tight">
-                  Inobee SARL : L’Excellence de l'Apiculture Marocaine, Sans Compromis.
+                  Une Société Dédiée à l'Authenticité du Miel Marocain.
                 </h2>
 
                 <p className="text-base text-[#4B5563] leading-relaxed">
-                  <strong>Inobee SARL</strong> est une maison apicole marocaine dédiée à la valorisation des miels purs de notre terroir. Nous privilégions une apiculture respectueuse des abeilles, exempte de toute pratique intensive et assurant une traçabilité totale, du rucher jusqu’à votre table.
+                  <strong>Inobee SARL</strong> est une société marocaine fondée avec la mission de rendre accessible le miel brut dans toute sa pureté originelle. Face à la multiplication des miels chauffés ou coupés au sirop, nous garantissons une traçabilité totale et des analyses physico-chimiques systématiques.
                 </p>
 
                 <div className="space-y-4 pt-2">
@@ -1501,9 +1370,9 @@ export default function App() {
                       <Heart className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="font-serif font-bold text-[#1E130A] text-base">3. Partenariats Éthiques & Terroir Local</h4>
+                      <h4 className="font-serif font-bold text-[#1E130A] text-base">3. Partenariats Directs avec les Apiculteurs</h4>
                       <p className="text-xs text-[#6B7280] mt-1 leading-relaxed">
-                        Nous collaborons directement avec les coopératives apicoles des montagnes marocaines, garantissant une rémunération juste aux apiculteurs et préservant la biodiversité mellifère nationale.
+                        Nous travaillons main dans la main avec les apiculteurs des montagnes marocaines, garantissant un prix juste et valorisant le savoir-faire apicole national.
                       </p>
                     </div>
                   </div>
@@ -1515,7 +1384,7 @@ export default function App() {
         </section>
 
         {/* ====================================================================
-            7. PREUVE SOCIALE : AVIS CLIENTS VÉRIFIÉS
+            8. AVIS CLIENTS VÉRIFIÉS
             ==================================================================== */}
         <section id="avis" className="py-20 bg-white border-b border-[#E8E1D5]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1571,16 +1440,16 @@ export default function App() {
         </section>
 
         {/* ====================================================================
-            8. GUIDE & FAQ SECTION
+            9. FAQ APICOLE
             ==================================================================== */}
         <section id="faq" className="py-20 bg-[#FAF7F2] border-b border-[#E8E1D5]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#D97706] block mb-2">
-                Transparence & Conseils
+                Questions Fréquentes
               </span>
               <h2 className="font-serif text-3xl font-bold text-[#1E130A]">
-                Foire Aux Questions & Conseils Apicoles
+                Tout Savoir sur Nos Miels & Livraisons
               </h2>
             </div>
 
@@ -1605,31 +1474,37 @@ export default function App() {
       </main>
 
       {/* ====================================================================
-          FOOTER LUXE & ASSISTANCE OFFICIELLE
+          10. FOOTER OFFICIEL INOBEE SARL AVEC LOGO
           ==================================================================== */}
       <footer id="contact" className="bg-[#140C06] text-[#FAF7F2] pt-16 pb-12 border-t border-[#D97706]/30 relative z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-white/10">
             
+            {/* Colonne Marque avec Logo */}
             <div className="lg:col-span-5 space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-[#D97706]/20 border border-[#D97706]/40 flex items-center justify-center text-[#F59E0B]">
-                  <Droplets className="w-5 h-5 fill-current" />
+              <div className="flex items-center gap-3.5">
+                <div className="w-12 h-12 rounded-xl bg-white p-1 flex items-center justify-center shrink-0">
+                  <img
+                    src="assets/logo.png"
+                    alt="Logo Inobee SARL"
+                    className="max-h-full max-w-full object-contain"
+                  />
                 </div>
                 <div>
                   <span className="font-serif text-xl font-bold text-white tracking-tight">INOBEE SARL</span>
-                  <p className="text-[10px] text-[#D97706] tracking-widest uppercase">Maison Apicole Marocaine</p>
+                  <p className="text-[10px] text-[#D97706] tracking-widest uppercase font-semibold">Société Marocaine de Miel Pur</p>
                 </div>
               </div>
               <p className="text-xs text-white/70 leading-relaxed max-w-sm">
-                Entreprise marocaine spécialisée dans la récolte, le conditionnement sous atmosphère contrôlée et la distribution directe de miels bruts d'exception.
+                Société marocaine spécialisée dans la récolte, le conditionnement sous atmosphère contrôlée et la distribution directe de miels bruts de terroirs.
               </p>
               <div className="flex items-center gap-3 pt-2 text-xs text-[#F59E0B]">
                 <ShieldCheck className="w-4 h-4 text-[#15803D]" />
-                <span>Analyses certifiées · Sans sucre ajouté · Extraction à froid</span>
+                <span>Analyses laboratoire · Non pasteurisé · Extraction à froid</span>
               </div>
             </div>
 
+            {/* Liens Rapides */}
             <div className="lg:col-span-3 space-y-3">
               <h4 className="text-xs font-bold uppercase tracking-wider text-[#D97706]">Boutique Directe</h4>
               <ul className="space-y-2 text-xs text-white/70">
@@ -1637,14 +1512,15 @@ export default function App() {
                 <li><a href="#boutique" className="hover:text-white transition-colors">Miel de Thym Pur (Zâatar)</a></li>
                 <li><a href="#boutique" className="hover:text-white transition-colors">Miel de Sidr Royal (Jujubier)</a></li>
                 <li><a href="#boutique" className="hover:text-white transition-colors">Miel d'Oranger du Souss</a></li>
-                <li><a href="#boutique" className="hover:text-white transition-colors">Pack Découverte Trio</a></li>
+                <li><a href="#boutique" className="hover:text-white transition-colors">Pack Découverte 3 Nectars</a></li>
               </ul>
             </div>
 
+            {/* Coordonnées & Assistance Maroc */}
             <div className="lg:col-span-4 space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#D97706]">Service Client & Expéditions</h4>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#D97706]">Commandes & Service Client</h4>
               <p className="text-xs text-white/70">
-                Expédition quotidienne de commandes par nos transporteurs partenaires dans toutes les villes du Maroc.
+                Expédition quotidienne partout au Maroc avec paiement en espèces à la livraison.
               </p>
               <div className="space-y-2 text-xs pt-1">
                 <a
@@ -1654,7 +1530,7 @@ export default function App() {
                   className="flex items-center gap-2 text-[#25D366] hover:underline font-semibold"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  <span>WhatsApp Assistance : +212 6 00 00 00 00</span>
+                  <span>WhatsApp Commercial : +212 6 00 00 00 00</span>
                 </a>
                 <p className="text-white/60">Email : contact@inobee.ma</p>
                 <p className="text-white/60">Siège social : Casablanca, Maroc</p>
@@ -1664,20 +1540,20 @@ export default function App() {
           </div>
 
           <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50">
-            <p>© {new Date().getFullYear()} Inobee SARL. Tous droits réservés.</p>
+            <p>© {new Date().getFullYear()} Inobee SARL. Société immatriculée au Maroc. Tous droits réservés.</p>
             <div className="flex items-center gap-4">
-              <span>Réglementation Marocaine</span>
+              <span>Miel 100% Marocain</span>
               <span>•</span>
               <span>Paiement à la Livraison</span>
               <span>•</span>
-              <span>Traçabilité Garantie</span>
+              <span>Garantie de Pureté</span>
             </div>
           </div>
         </div>
       </footer>
 
       {/* ====================================================================
-          TIROIR PANIER SLIDE-OVER & TUNNEL DE COMMANDE MAROCAIN
+          TIROIR PANIER SLIDE-OVER & CHECKOUT COD
           ==================================================================== */}
       {isCartOpen && (
         <div className="fixed inset-0 z-50 overflow-hidden">
@@ -1689,13 +1565,16 @@ export default function App() {
           <div className="fixed inset-y-0 right-0 max-w-full flex pl-6 sm:pl-10">
             <div className="w-screen max-w-lg bg-[#FAF7F2] shadow-2xl flex flex-col border-l border-[#E8E1D5]">
               
+              {/* Header Panier avec Logo */}
               <div className="p-6 bg-white border-b border-[#E8E1D5] flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <ShoppingBag className="w-5 h-5 text-[#D97706]" />
-                  <h3 className="font-serif text-xl font-bold text-[#1E130A]">Votre Panier Inobee</h3>
-                  <span className="text-xs bg-[#FAF7F2] border border-[#E8E1D5] px-2 py-0.5 rounded-full font-bold text-[#D97706]">
-                    {totalItemCount} {totalItemCount > 1 ? 'articles' : 'article'}
-                  </span>
+                <div className="flex items-center gap-3">
+                  <img src="assets/logo.png" alt="Inobee Logo" className="w-8 h-8 object-contain" />
+                  <div>
+                    <h3 className="font-serif text-lg font-bold text-[#1E130A]">Panier Inobee SARL</h3>
+                    <span className="text-[10px] text-[#D97706] font-semibold">
+                      {totalItemCount} {totalItemCount > 1 ? 'articles sélectionnés' : 'article sélectionné'}
+                    </span>
+                  </div>
                 </div>
                 <button
                   type="button"
@@ -1749,7 +1628,7 @@ export default function App() {
                       onClick={() => setIsCartOpen(false)}
                       className="mt-2 px-6 py-2.5 rounded-xl bg-[#D97706] text-white text-xs font-bold"
                     >
-                      Explorer la Boutique
+                      Voir Nos Miels
                     </button>
                   </div>
                 ) : (
@@ -1858,7 +1737,7 @@ export default function App() {
                       <div className="flex items-center gap-2 pb-2 border-b border-[#FAF7F2]">
                         <Truck className="w-4 h-4 text-[#D97706]" />
                         <h4 className="font-serif font-bold text-sm text-[#1E130A]">
-                          Informations de Livraison au Maroc
+                          Coordonnées de Livraison au Maroc
                         </h4>
                       </div>
 
@@ -1935,7 +1814,7 @@ export default function App() {
                 )}
               </div>
 
-              {/* Totaux & Actions Doubles */}
+              {/* Totaux & Actions */}
               {cart.length > 0 && (
                 <div className="p-6 bg-white border-t border-[#E8E1D5] space-y-4">
                   <div className="space-y-1.5 text-xs text-[#4B5563]">
@@ -2007,7 +1886,7 @@ export default function App() {
       )}
 
       {/* ====================================================================
-          MODALE "DÉTAILS & BIENFAITS" (QUICK VIEW)
+          MODALE "DÉTAILS & BIENFAITS"
           ==================================================================== */}
       {quickViewProduct && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
@@ -2024,7 +1903,7 @@ export default function App() {
 
             <div className="flex items-center gap-2 text-[#D97706] text-xs font-bold uppercase tracking-wider mb-2">
               <Award className="w-4 h-4" />
-              <span>Fiche Technique Apicole · Inobee SARL</span>
+              <span>Fiche Technique Officielle · Inobee SARL</span>
             </div>
 
             <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#1E130A]">
@@ -2143,7 +2022,7 @@ export default function App() {
       )}
 
       {/* ====================================================================
-          MODALE REÇU OFFICIEL DE COMMANDE COD
+          MODALE REÇU OFFICIEL DE COMMANDE AVEC LOGO INOBEE SARL
           ==================================================================== */}
       {orderConfirmed && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
@@ -2158,18 +2037,19 @@ export default function App() {
               <X className="w-5 h-5" />
             </button>
 
+            {/* Logo Officiel au sommet du reçu */}
             <div className="text-center py-2">
-              <div className="w-14 h-14 bg-[#15803D]/15 text-[#15803D] rounded-full flex items-center justify-center mx-auto mb-3">
-                <Check className="w-8 h-8 stroke-[2.5]" />
+              <div className="w-16 h-16 mx-auto mb-2 flex items-center justify-center">
+                <img src="assets/logo.png" alt="Inobee Logo" className="max-h-full max-w-full object-contain drop-shadow" />
               </div>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#D97706]">
-                Bon de Commande Validé
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[#D97706]">
+                Inobee SARL • Bon de Commande Officiel
               </span>
               <h3 className="font-serif text-2xl font-bold text-[#1E130A] mt-1">
-                Merci pour votre confiance !
+                Merci pour votre commande !
               </h3>
               <p className="font-mono text-xs text-[#D97706] font-bold mt-1">
-                Réf : {orderConfirmed.orderId}
+                Réf de suivi : {orderConfirmed.orderId}
               </p>
             </div>
 
@@ -2197,7 +2077,7 @@ export default function App() {
             </div>
 
             <p className="text-[11px] text-[#6B7280] text-center mb-6 leading-relaxed">
-              Votre colis est en cours de préparation au rucher. Notre équipe logistique vous appellera sur votre numéro avant le passage du livreur.
+              Votre colis est en cours de préparation dans notre atelier apicole. Notre équipe logistique vous appellera sur votre numéro avant le passage du livreur.
             </p>
 
             <div className="space-y-2.5">
