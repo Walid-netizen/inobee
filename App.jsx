@@ -72,12 +72,12 @@ function BrandLogo({ className = "h-10 w-auto object-contain", containerClassNam
 // PHOTOS PERMANENTES ET VÉRIFIÉES DE MIEL PUR (STUDIO LIGHTING)
 // ============================================================================
 const HONEY_IMAGES = {
-  hero: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=1000&q=80',
-  daghmous: 'https://images.unsplash.com/photo-1471943311424-646960669fbc?auto=format&fit=crop&w=800&q=80',
-  thym: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=800&q=80',
-  sidr: 'https://images.unsplash.com/photo-1587049352847-4a222e784d38?auto=format&fit=crop&w=800&q=80',
-  oranger: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=800&q=80',
-  pack: 'https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=800&q=80'
+  hero: '/assets/img/hero-honey.jpg',
+  daghmous: '/assets/img/product-daghmous.jpg',
+  thym: '/assets/img/product-thym.jpg',
+  sidr: '/assets/img/product-sidr.jpg',
+  oranger: '/assets/img/product-oranger.jpg',
+  pack: '/assets/img/product-pack-trio.jpg'
 };
 
 // Catalogue officiel Inobee SARL
@@ -723,34 +723,49 @@ export default function App() {
                 <span className="font-serif text-2xl sm:text-3xl font-extrabold tracking-tight text-[#1E130A] leading-none">
                   INOBEE
                 </span>
-                <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#D97706]/15 text-[#D97706] border border-[#D97706]/30 uppercase">
-                  SARL
+                <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#D97706] text-white uppercase tracking-wider shadow-xs">
+                  PRO
                 </span>
               </div>
               <span className="text-[10px] sm:text-[11px] tracking-wider text-[#D97706] font-semibold uppercase mt-1">
-                Société de Miel Pur & Apithérapie
+                SOCIÉTÉ COMMERCIALE AGRICOLE
               </span>
             </div>
           </a>
 
           {/* Navigation Liens Desktop */}
-          <nav className="hidden lg:flex items-center gap-8 text-sm font-semibold text-[#4B5563]">
-            <a href="#boutique" className="hover:text-[#D97706] transition-colors">Nos Miels</a>
-            <a href="#terroirs" className="hover:text-[#D97706] transition-colors flex items-center gap-1">
-              <Mountain className="w-3.5 h-3.5 text-[#D97706]" />
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-semibold text-[#4B5563]">
+            <a href="#boutique" className="text-[#D97706] relative pb-1 border-b-2 border-[#D97706] flex items-center gap-1.5 font-bold transition-all">
+              <span>🍯</span>
+              <span>Nos Produits</span>
+            </a>
+            <a href="#terroirs" className="hover:text-[#D97706] transition-colors flex items-center gap-1.5">
+              <span>⛰️</span>
               <span>Terroirs de l'Atlas</span>
             </a>
-            <a href="#guide" className="hover:text-[#D97706] transition-colors">Guide de Choix</a>
-            <a href="#societe" className="hover:text-[#D97706] transition-colors">La Société</a>
-            <a href="#avis" className="hover:text-[#D97706] transition-colors">Avis Clients</a>
-            <a href="#contact" className="hover:text-[#D97706] transition-colors">Contact</a>
+            <a href="#guide" className="hover:text-[#D97706] transition-colors flex items-center gap-1.5">
+              <span>🍃</span>
+              <span>Guide de Choix</span>
+            </a>
+            <a href="#societe" className="hover:text-[#D97706] transition-colors flex items-center gap-1.5">
+              <span>📊</span>
+              <span>La Société</span>
+            </a>
+            <a href="#avis" className="hover:text-[#D97706] transition-colors flex items-center gap-1.5">
+              <span>🤝</span>
+              <span>Avis Clients</span>
+            </a>
+            <a href="#contact" className="hover:text-[#D97706] transition-colors flex items-center gap-1.5">
+              <span>✉️</span>
+              <span>Contact</span>
+            </a>
           </nav>
 
           {/* Bouton Panier Dynamique */}
           <div className="flex items-center gap-3">
             <button
               onClick={() => setIsCartOpen(true)}
-              className="flex items-center gap-2.5 bg-[#1E130A] hover:bg-[#2A1B0E] text-[#FAF7F2] px-4 py-2.5 rounded-full transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 group"
+              className="flex items-center gap-2 bg-[#1E130A] hover:bg-[#2A1B0E] text-[#FAF7F2] px-4 sm:px-5 py-2.5 rounded-full transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 group"
               aria-label="Ouvrir le panier"
             >
               <div className="relative">
@@ -761,9 +776,9 @@ export default function App() {
                   </span>
                 )}
               </div>
-              <span className="hidden sm:inline text-xs font-semibold tracking-wide">Panier</span>
-              <span className="text-xs font-bold text-[#F59E0B] border-l border-white/20 pl-2">
-                {cartTotal} MAD
+              <span className="text-xs font-bold text-[#FAF7F2]">Panier</span>
+              <span className="text-xs font-bold text-[#F59E0B]">
+                ({cartTotal} MAD)
               </span>
             </button>
 
@@ -780,23 +795,23 @@ export default function App() {
         {/* Menu Mobile */}
         {isMobileMenuOpen && (
           <div className="lg:hidden bg-[#FAF7F2] border-b border-[#E8E1D5] px-6 py-4 space-y-3">
-            <a href="#boutique" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-semibold text-[#1E130A] py-1">
-              Nos Miels Purs
+            <a href="#boutique" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-semibold text-[#D97706] py-1">
+              🍯 Nos Produits
             </a>
             <a href="#terroirs" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-semibold text-[#1E130A] py-1">
-              Terroirs de l'Atlas
+              ⛰️ Terroirs de l'Atlas
             </a>
             <a href="#guide" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-semibold text-[#1E130A] py-1">
-              Guide de Choix
+              🍃 Guide de Choix
             </a>
             <a href="#societe" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-semibold text-[#1E130A] py-1">
-              La Société Inobee SARL
+              📊 La Société Inobee SARL
             </a>
             <a href="#avis" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-semibold text-[#1E130A] py-1">
-              Avis Clients Vérifiés
+              🤝 Avis Clients Vérifiés
             </a>
             <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-semibold text-[#1E130A] py-1">
-              Contact & Expéditions
+              ✉️ Contact & Expéditions
             </a>
           </div>
         )}
@@ -804,99 +819,140 @@ export default function App() {
 
       <main>
         {/* ====================================================================
-            3. HERO SECTION : SHOWCASE STUDIO DU POT DE MIEL PUR
+            3. HERO SECTION : DIRECTEMENT INSPIRÉ DE LA MAQUETTE OFFICIELLE INOBEE SARL
             ==================================================================== */}
-        <section className="relative overflow-hidden pt-8 pb-16 lg:pt-16 lg:pb-24 border-b border-[#E8E1D5] bg-gradient-to-b from-[#FAF7F2] via-[#FAF4E8] to-[#FAF7F2]">
+        <section className="relative overflow-hidden pt-8 pb-16 lg:pt-14 lg:pb-20 border-b border-[#E8E1D5] bg-gradient-to-b from-[#FAF7F2] via-[#FAF3E6] to-[#FAF7F2]">
           <GoldenPollenCanvas />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               
-              {/* Colonne Gauche : Proposition de Valeur */}
-              <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+              {/* Colonne Gauche : Proposition de Valeur & Badges */}
+              <div className="lg:col-span-6 xl:col-span-6 space-y-6 text-center lg:text-left">
                 
-                <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/90 border border-[#D97706]/40 text-[#1E130A] text-xs font-bold tracking-wide shadow-sm">
-                  <span className="w-2 h-2 rounded-full bg-[#15803D]"></span>
-                  <span>Inobee SARL • Miels Purs Récoltés au Maroc</span>
+                {/* Pill Top Badge */}
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/95 border border-[#D97706]/30 text-[#1E130A] text-xs font-semibold tracking-wide shadow-sm">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#15803D] inline-block"></span>
+                  <span>100% Naturel • Direct des Terroirs du Maroc</span>
+                  <span className="text-sm">🍃</span>
                 </div>
 
-                <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-[#1E130A] tracking-tight leading-[1.14]">
-                  Le Vrai Miel Brut du Maroc, <span className="text-[#D97706] italic font-normal">Directement du Rucher à Votre Table.</span>
+                {/* Kicker avec trait doré horizontal */}
+                <div className="flex items-center justify-center lg:justify-start gap-3">
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#D97706]">
+                    LE GOÛT AUTHENTIQUE DU MAROC
+                  </span>
+                  <span className="w-12 h-0.5 bg-[#D97706]/60 rounded-full hidden sm:inline-block"></span>
+                </div>
+
+                {/* Titre Principal exact */}
+                <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#1E130A] tracking-tight leading-[1.12]">
+                  Le Vrai Miel Brut du Maroc,{' '}
+                  <span className="text-[#D97706] italic font-normal block sm:inline">
+                    Directement du Rucher à Votre Table.
+                  </span>
                 </h1>
 
-                <p className="text-base sm:text-lg text-[#4B5563] max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
-                  La société <strong>Inobee SARL</strong> récolte et conditionne des miels 100% purs et bruts, extraits mécaniquement à froid sans chauffage, garantis sans sucre ajouté et livrés partout au Maroc.
+                {/* Paragraphe descriptif exact */}
+                <p className="text-base sm:text-lg text-[#4B5563] max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                  Un miel pur et naturel, récolté avec soin dans les montagnes de l'Atlas, sans aucun additif, pour une saveur unique et une qualité exceptionnelle.
                 </p>
 
                 {/* CTAs */}
                 <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
                   <a
                     href="#boutique"
-                    className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#D97706] hover:bg-[#B45309] text-white text-sm font-bold tracking-wide shadow-xl shadow-[#D97706]/30 transition-all duration-300 flex items-center justify-center gap-2 group hover:-translate-y-0.5"
+                    className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#D97706] hover:bg-[#B45309] text-white text-sm font-bold tracking-wide shadow-xl shadow-[#D97706]/35 transition-all duration-300 flex items-center justify-center gap-2.5 group hover:-translate-y-0.5"
                   >
+                    <ShoppingBag className="w-4 h-4 text-white" />
                     <span>Commander Nos Miels</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
                   </a>
                   <a
                     href="#societe"
-                    className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white hover:bg-[#FAF7F2] text-[#1E130A] text-sm font-semibold border border-[#E8E1D5] shadow-sm transition-all text-center"
+                    className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white hover:bg-[#FAF7F2] text-[#1E130A] text-sm font-semibold border border-[#E8E1D5] shadow-sm transition-all text-center flex items-center justify-center gap-2 group hover:border-[#D97706]/40"
                   >
-                    Découvrir Inobee SARL
+                    <div className="w-5 h-5 rounded-full border border-[#1E130A] flex items-center justify-center group-hover:border-[#D97706]">
+                      <span className="text-[10px] ml-0.5 group-hover:text-[#D97706]">▶</span>
+                    </div>
+                    <span>Découvrir Inobee SARL</span>
                   </a>
                 </div>
 
-                {/* 4 Badges de Confiance Société */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-[#E8E1D5]/80">
-                  <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-[#E8E1D5] shadow-sm">
-                    <CheckCircle2 className="w-4 h-4 text-[#15803D] shrink-0" />
-                    <span className="text-xs font-semibold text-[#1E130A]">100% Naturel & Brut</span>
+                {/* Bandeau Unique de 4 Badges de Confiance (Style Pill Bar) */}
+                <div className="p-3 sm:p-4 rounded-2xl bg-white/95 backdrop-blur-md border border-[#E8E1D5] shadow-sm grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-full bg-[#15803D]/10 flex items-center justify-center shrink-0">
+                      <Flower2 className="w-4 h-4 text-[#15803D]" />
+                    </div>
+                    <span className="text-xs font-bold text-[#1E130A] leading-tight">100% Naturel & Pur</span>
                   </div>
-                  <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-[#E8E1D5] shadow-sm">
-                    <Award className="w-4 h-4 text-[#D97706] shrink-0" />
-                    <span className="text-xs font-semibold text-[#1E130A]">Analysé en Labo</span>
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-full bg-[#D97706]/10 flex items-center justify-center shrink-0">
+                      <MapPin className="w-4 h-4 text-[#D97706]" />
+                    </div>
+                    <span className="text-xs font-bold text-[#1E130A] leading-tight">Origine du Maroc</span>
                   </div>
-                  <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-[#E8E1D5] shadow-sm">
-                    <Banknote className="w-4 h-4 text-[#15803D] shrink-0" />
-                    <span className="text-xs font-semibold text-[#1E130A]">Paiement à la Livraison</span>
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-full bg-[#15803D]/10 flex items-center justify-center shrink-0">
+                      <ShieldCheck className="w-4 h-4 text-[#15803D]" />
+                    </div>
+                    <span className="text-xs font-bold text-[#1E130A] leading-tight">Qualité Garantie</span>
                   </div>
-                  <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-[#E8E1D5] shadow-sm">
-                    <Truck className="w-4 h-4 text-[#D97706] shrink-0" />
-                    <span className="text-xs font-semibold text-[#1E130A]">Livraison 24/48h</span>
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-full bg-[#D97706]/10 flex items-center justify-center shrink-0">
+                      <Truck className="w-4 h-4 text-[#D97706]" />
+                    </div>
+                    <span className="text-xs font-bold text-[#1E130A] leading-tight">Livraison 24/48h</span>
                   </div>
                 </div>
 
               </div>
 
-              {/* Colonne Droite : Showcase Studio Jarre de Miel Pur (Remplace l'ancienne image) */}
-              <div className="lg:col-span-5 relative flex justify-center">
-                <div className="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-gradient-to-br from-[#FAF7F2] to-[#E8E1D5] group card-luxury-hover">
+              {/* Colonne Droite : Showcase de Miel Pur & Atlas Mountains */}
+              <div className="lg:col-span-6 xl:col-span-6 relative flex justify-center">
+                <div className="relative w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-[#FAF7F2] group card-luxury-hover">
+                  
+                  {/* Photo Studio / Atlas Hero Jar */}
                   <img
                     src={HONEY_IMAGES.hero}
-                    alt="Miel Brut Pur Inobee SARL"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
+                    alt="Miel Brut Pur Inobee SARL - Rucher de l'Atlas"
+                    className="w-full h-auto aspect-[16/10] sm:aspect-[16/9] object-cover transition-transform duration-700 group-hover:scale-105"
+                    onError={(e) => {
+                      e.currentTarget.src = '/assets/img/product-pack-trio.jpg';
+                    }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#140C06]/85 via-transparent to-transparent"></div>
                   
-                  {/* Sceau d'Authenticité Officiel avec Logo */}
-                  <div className="absolute top-5 left-5 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-[#D97706]/40 shadow-lg flex items-center gap-2.5">
-                    <BrandLogo className="h-7 w-auto object-contain" />
-                    <div>
-                      <span className="text-[10px] font-bold text-[#1E130A] block leading-none">Inobee SARL</span>
-                      <span className="text-[8px] tracking-wider text-[#D97706] font-bold uppercase">Sceau d'Authenticité</span>
+                  {/* Dégradé d'ambiance doré subtil */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#140C06]/40 via-transparent to-transparent pointer-events-none"></div>
+
+                  {/* Sceau Doré Médaille "Qualité Premium ★★★★★" (Flottant en haut à droite) */}
+                  <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-30 flex flex-col items-center justify-center w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-[#F59E0B] via-[#D97706] to-[#92400E] text-white shadow-2xl p-2 border-2 border-amber-200/90 transform hover:scale-105 transition-transform duration-300">
+                    <div className="w-full h-full rounded-full border border-dashed border-amber-100/70 flex flex-col items-center justify-center text-center p-1">
+                      <Sparkles className="w-4 h-4 text-amber-100 mb-0.5" />
+                      <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider leading-none">Qualité</span>
+                      <span className="text-xs sm:text-sm font-extrabold uppercase tracking-tight leading-tight">Premium</span>
+                      <div className="flex items-center gap-0.5 text-amber-200 mt-1">
+                        <Star className="w-2.5 h-2.5 fill-amber-200" />
+                        <Star className="w-2.5 h-2.5 fill-amber-200" />
+                        <Star className="w-2.5 h-2.5 fill-amber-200" />
+                        <Star className="w-2.5 h-2.5 fill-amber-200" />
+                        <Star className="w-2.5 h-2.5 fill-amber-200" />
+                      </div>
                     </div>
                   </div>
 
-                  {/* Pastille Basse */}
-                  <div className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-white/40 shadow-xl flex items-center justify-between">
+                  {/* Étiquette d'Origine Terroir en bas à gauche */}
+                  <div className="absolute bottom-4 left-4 right-4 sm:right-auto bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-white/60 shadow-lg flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-[#FAF7F2] border border-[#E8E1D5] flex items-center justify-center shrink-0">
+                      <BrandLogo className="h-6 w-auto object-contain" />
+                    </div>
                     <div>
                       <p className="text-[10px] font-bold uppercase tracking-wider text-[#D97706]">Récolte Fraîche 2026</p>
-                      <p className="font-serif text-sm font-bold text-[#1E130A]">Miel Brut du Terroir Marocain</p>
-                      <p className="text-[11px] text-[#6B7280]">Non pasteurisé · Extraction centrifuge à froid</p>
+                      <p className="font-serif text-xs sm:text-sm font-bold text-[#1E130A]">Miel Brut Pur de l'Atlas</p>
                     </div>
-                    <span className="px-3 py-1 bg-[#15803D]/10 text-[#15803D] text-xs font-bold rounded-full shrink-0">
-                      Pur & Certifié
-                    </span>
                   </div>
+
                 </div>
               </div>
 

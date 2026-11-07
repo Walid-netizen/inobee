@@ -36,12 +36,12 @@ app.use((req, res, next) => {
 // BASE DE DONNÉES EN MÉMOIRE : CATALOGUE OFFICIEL DES PRODUITS
 // ----------------------------------------------------------------------------
 const HONEY_IMAGES = {
-  hero: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=1000&q=80',
-  daghmous: 'https://images.unsplash.com/photo-1471943311424-646960669fbc?auto=format&fit=crop&w=800&q=80',
-  thym: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=800&q=80',
-  sidr: 'https://images.unsplash.com/photo-1587049352847-4a222e784d38?auto=format&fit=crop&w=800&q=80',
-  oranger: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=800&q=80',
-  pack: 'https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=800&q=80'
+  hero: '/assets/img/hero-honey.jpg',
+  daghmous: '/assets/img/product-daghmous.jpg',
+  thym: '/assets/img/product-thym.jpg',
+  sidr: '/assets/img/product-sidr.jpg',
+  oranger: '/assets/img/product-oranger.jpg',
+  pack: '/assets/img/product-pack-trio.jpg'
 };
 
 const PRODUCTS = [
